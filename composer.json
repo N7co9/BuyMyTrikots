@@ -1,0 +1,17 @@
+{
+    "autoload": {
+        "psr-4": {
+            "App\\": "src//"
+        }
+    },
+    "require": {
+        "ext-json": "*",
+        "twig/twig": "^3.0",
+        "ext-pdo": "*"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-latest"
+    ,
+        "phpunit/phpunit": "^10.3"
+    }
+}

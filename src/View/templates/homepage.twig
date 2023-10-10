@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BuyMyTrikots</title>
+</head>
+<body>
+<h2> # choose your league # </h2>
+
+<ul>
+    {% for league in leagues %}
+<li>
+    <a href="/?page=teams&league={{ league.key }}">{{ league.name }}</a>
+</li>
+    {% endfor %}
+</ul>
+
+
+</body>
+</html>
