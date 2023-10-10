@@ -1,19 +1,144 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>BuyMyTrikots</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuyMyTrikots - Trikot Webshop</title>
+    {% for player in players %}
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ player.clubEmblem }}">
+    {%  endfor %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-GLhlZFSg5MxCXv4i5P/MZfBhqIyT5zzc5Nq9zjr5A8gFDmKfsTPbXwc/r5A21K4U" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        .product {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+
+        .product img {
+            max-width: 100px;
+            height: auto;
+        }
+
+        .product-info {
+            flex: 1;
+            padding-left: 10px;
+        }
+
+        .product-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .product-price {
+            font-size: 16px;
+            color: #f36f6f;
+        }
+
+        .product-details {
+            font-size: 14px;
+            color: #777;
+        }
+
+        .button-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff; /* Button color */
+            color: #fff; /* Text color */
+            text-decoration: none;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .button-link:hover {
+            background-color: #0056b3; /* Hover color */
+        }
+
+        .header-buttons {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .login-button,
+        .register-button,
+        .basket-button {
+            background-color: #f36f6f;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+            text-decoration: none;
+        }
+
+        .login-button:hover,
+        .register-button:hover,
+        .basket-button:hover {
+            background-color: #e04545;
+        }
+
+        .basket-button {
+            background-color: #007bff; /* Change color to your preference */
+        }
+
+
+    </style>
 </head>
 <body>
-<h2> # choose your league # </h2>
-
-<ul>
-    {% for league in leagues %}
-<li>
-    <a href="/?page=teams&league={{ league.key }}">{{ league.name }}</a>
-</li>
+<header>
+    <h1># BuyMyTrikots - Trikot Webshop #</h1>
+</header>
+<div class="header-buttons">
+    <a href="/?page=registration" class="login-button">Login</a>
+    <a href="/?page=login" class="register-button">Register</a>
+    <a href="#" class="basket-button">
+        <img src="https://icons.veryicon.com/png/o/system/dan_system/shopping-basket-11.png" alt="Shopping Basket" style=" width: 16px; height: 16px;">
+        Basket
+    </a>
+</div>
+<div class="container">
+    {% for player in players %}
+    <div class="product">
+        <img src="{{ player.clubEmblem }}" alt="{{ player.name }}">
+        <div class="product-info">
+            <h2 class="product-title">{{ player.name }} Trikot</h2>
+            <p class="product-details">
+                <span>{{ player.nationality }}</span><br>
+                <span>{{ player.dateOfBirth }}</span>
+            </p>
+            <p class="product-price">$29.99</p>
+        </div>
+        <a href="/?page=shop&action=add&id={{ player.id }}" class="button-link">Add to Cart</a>
+    </div>
     {% endfor %}
-</ul>
-
-
+</div>
 </body>
 </html>

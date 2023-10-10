@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .registration-form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 300px;
+        }
+
+        .registration-form h2 {
+            text-align: center;
+        }
+
+        .registration-form label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        .registration-form input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .registration-form button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            padding: 10px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .registration-form button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="registration-form">
+    <h2>Registration</h2>
+    <form action="" method="POST">
+        <label for="name">Name</label><br>
+        <input type="text" value="{{ vName }}" id="name" name="name"><br>
+        <label for="mail">E-Mail</label><br>
+        <input type="text" value="{{ vMail }}" id="mail" name="mail"><br>
+        <label for="password">Password</label><br>
+        <input type="password" id="password" name="password"><br>
+
+        <button type="submit">Register</button>
+    </form>
+</div>
+
+{% for error in errors %}
+    <p style="color: red">{{ error.message }}</p>
+{% endfor %}
+
+{% if not ePass %}
+    <p style="color: red">{{ error }}</p>
+{% endif %}
+
+</body>
+</html>
