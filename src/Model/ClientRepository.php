@@ -30,6 +30,11 @@ class ClientRepository
         return false;
     }
 
+    public function getBasketContent($userID) : array
+    {
+        return $this->sqlConnector->executeSelectQuery("SELECT user_baskets.item_id FROM user_baskets where user_baskets.user_id = :user_id", [':user_id' => $userID]);
+    }
+
     public function getUserID(string $mail) : ?int
     {
         $rawIdArray =  $this->sqlConnector->executeSelectQuery("SELECT users.id FROM users where users.email = :mail", [":mail" => $mail]);
@@ -37,7 +42,6 @@ class ClientRepository
         foreach ($rawIdArray as $entry){
             $formattedId = $entry['id'];
         }
-
         return $formattedId ?? null;
     }
 

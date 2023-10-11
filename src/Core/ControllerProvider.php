@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Core;
 
+use App\Controller\BasketController;
 use App\Controller\ClientLoginController;
 use App\Controller\ClientLogoutController;
 use App\Controller\ClientRegistrationController;
@@ -17,7 +18,8 @@ class ControllerProvider
             "shop" => HomepageController::class,
             "registration" => ClientRegistrationController::class,
             "login" => ClientLoginController::class,
-            "logout" => ClientLogoutController::class
+            "logout" => ClientLogoutController::class,
+            "basket" => BasketController::class
         ];
     }
 }

@@ -7,11 +7,10 @@
     "require": {
         "ext-json": "*",
         "twig/twig": "^3.0",
-        "ext-pdo": "*"
+        "ext-pdo": "*",
+        "phpunit/phpunit": "^10.4"
     },
     "require-dev": {
         "roave/security-advisories": "dev-latest"
-    ,
-        "phpunit/phpunit": "^10.3"
     }
 }

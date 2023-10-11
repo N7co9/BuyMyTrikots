@@ -2,6 +2,7 @@
 
 namespace App\Core\Mapper;
 
+use App\Core\DTO\BasketDTO;
 use App\Core\DTO\PlayerDTO;
 
 class ApiMapper
@@ -25,5 +26,16 @@ class ApiMapper
             $list [] = $DTO;
         }
         return $list;
+    }
+
+    public function MapBasket($array, $quantity) : BasketDTO
+    {
+            $DTO = new BasketDTO();
+            $DTO->name = $array['name'] . ' Trikot';
+            $DTO->icon = $array['currentTeam']['crest'];
+            $DTO->id = $array['id'];
+            $DTO->quantity = $quantity[0]['quantity'];
+
+        return $DTO;
     }
 }

@@ -33,7 +33,7 @@ class SqlConnector
         $this->connect();
         $stmt = $this->pdo->prepare($query);
         foreach ($params as $key => $value) {
-            $stmt->bindParam($key, $value, PDO::PARAM_STR);
+            $stmt->bindValue($key, $value, PDO::PARAM_STR);
         }
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

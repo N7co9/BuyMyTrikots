@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Basket</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+            background-color: #f8f8f8;
+        }
+
+        .basket-container {
+            background-color: #fff;
+            padding: 30px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .basket-header {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #e2e2e2;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+        }
+
+        .basket-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #e2e2e2;
+            border-radius: 5px;
+        }
+
+        .basket-item img {
+            max-width: 50px;
+            margin-right: 10px;
+        }
+
+        .product-details {
+            flex-grow: 1;
+        }
+
+        .product-quantity {
+            display: flex;
+            align-items: center;
+        }
+
+        .product-quantity input {
+            width: 50px;
+            text-align: center;
+            margin-left: 10px;
+            border: 1px solid #e2e2e2;
+            padding: 5px;
+        }
+
+        .checkout-btn {
+            padding: 15px 30px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+        }
+
+        .checkout-btn:hover {
+            background-color: #555;
+            color: white;
+        }
+
+        .back-home {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .back-home a {
+            color: #333;
+            text-decoration: underline;
+            transition: color 0.3s ease;
+        }
+
+        .back-home a:hover {
+            color: #555;
+        }
+
+        .remove-item {
+            cursor: pointer;
+            padding: 5px 8px;
+            background-color: #f2f2f2;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-left: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .remove-item:hover {
+            background-color: #e6e6e6;
+        }
+    </style>
+</head>
+<body>
+<div class="basket-container">
+    <div class="basket-header">
+        <h2>Your Basket</h2>
+        <p>Total: $100</p>
+    </div>
+
+    {% for product in contents %}
+        {% if product.quantity >= 1 %}
+    <div class="basket-item">
+        <img src="{{ product.icon }}" alt="{{ product.name }}">
+        <div class="product-details">
+            <p>{{ product.name }}</p>
+            <p>{{ product.price }}</p>
+        </div>
+        <div class="product-quantity">
+            <label>Qty:</label>
+            <input type="number" value="{{ product.quantity }}" min="1">
+        </div>
+        <a href="/?page=basket&action=remove&id={{ product.id }}" class="remove-item" title="Remove this item">X</a>
+    </div>
+        {% endif %}
+{% endfor %}
+
+<a href="#" class="checkout-btn">Checkout</a>
+</div>
+
+<div class="back-home">
+    Want to go back to the <a href="/?page=shop&id=3">homepage</a>?
+</div>
+
+</body>
+</html>

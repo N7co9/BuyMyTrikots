@@ -17,4 +17,10 @@ class ApiHandling {
     {
         return $this->makeApiRequest('teams/' . $teamID);
     }
+
+    public function requestItemInfo($itemID) : array
+    {
+        return $this->makeApiRequest('persons/' . $itemID['item_id']);
+
+    }
 }
