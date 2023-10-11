@@ -10,4 +10,8 @@ class PlayerDTO
 
     public string $nationality = '';
     public string $dateOfBirth = '';
+    public string $clubName = '';
+    public string $clubAddress = '';
+    public string $clubFounded = '';
+    public string $clubWebsite = '';
 }

@@ -17,6 +17,10 @@ class ApiMapper
             $DTO->nationality = $item['nationality'];
             $DTO->dateOfBirth = $item['dateOfBirth'];
             $DTO->clubEmblem = $array['crest'];
+            $DTO->clubAddress = $array['address'];
+            $DTO->clubFounded = $array['founded'];
+            $DTO->clubName = $array['name'];
+            $DTO->clubWebsite = $array['website'];
 
             $list [] = $DTO;
         }

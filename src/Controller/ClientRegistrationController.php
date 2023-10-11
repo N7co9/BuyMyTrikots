@@ -28,17 +28,11 @@ class ClientRegistrationController implements ControllerInterface
 
     public function dataConstruct(): object
     {
-        var_dump($_POST['name']);
-        var_dump($_POST['mail']);
-        var_dump($_POST['password']);
-
-
         $clientDTO = new ClientDTO();
         $clientDTO->username = ($_POST['name'] ?? '');
         $clientDTO->email = ($_POST['mail'] ?? '');
         $clientDTO->password = ($_POST['password'] ?? '');
         $this->errorDTOList = [];
-
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 

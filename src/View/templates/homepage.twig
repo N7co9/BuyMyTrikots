@@ -6,8 +6,9 @@
     <title>BuyMyTrikots - Trikot Webshop</title>
     {% for player in players %}
         <link rel="icon" type="image/png" sizes="32x32" href="{{ player.clubEmblem }}">
-    {%  endfor %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-GLhlZFSg5MxCXv4i5P/MZfBhqIyT5zzc5Nq9zjr5A8gFDmKfsTPbXwc/r5A21K4U" crossorigin="anonymous">
+    {% endfor %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+          integrity="sha384-GLhlZFSg5MxCXv4i5P/MZfBhqIyT5zzc5Nq9zjr5A8gFDmKfsTPbXwc/r5A21K4U" crossorigin="anonymous">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -76,6 +77,7 @@
             border-radius: 4px;
             cursor: pointer;
         }
+
         .button-link:hover {
             background-color: #0056b3; /* Hover color */
         }
@@ -109,36 +111,105 @@
             background-color: #007bff; /* Change color to your preference */
         }
 
+        .search-container {
+            text-align: center;
+            padding: 20px;
+        }
 
+        .search-bar {
+            width: 300px;
+            padding: 10px;
+            border: none;
+            border-radius: 25px;
+            margin-right: 10px;
+        }
+
+        .search-button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+
+        .search-button:hover {
+            background-color: #0056b3;
+        }
+
+        .club-info {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            width: 30%;
+        }
+
+        .club-info h2 {
+            font-size: 24px;
+        }
+
+        .club-info p {
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
 <header>
     <h1># BuyMyTrikots - Trikot Webshop #</h1>
 </header>
-<div class="header-buttons">
-    <a href="/?page=registration" class="login-button">Login</a>
-    <a href="/?page=login" class="register-button">Register</a>
-    <a href="#" class="basket-button">
-        <img src="https://icons.veryicon.com/png/o/system/dan_system/shopping-basket-11.png" alt="Shopping Basket" style=" width: 16px; height: 16px;">
-        Basket
-    </a>
-</div>
 <div class="container">
-    {% for player in players %}
-    <div class="product">
-        <img src="{{ player.clubEmblem }}" alt="{{ player.name }}">
-        <div class="product-info">
-            <h2 class="product-title">{{ player.name }} Trikot</h2>
-            <p class="product-details">
-                <span>{{ player.nationality }}</span><br>
-                <span>{{ player.dateOfBirth }}</span>
-            </p>
-            <p class="product-price">$29.99</p>
-        </div>
-        <a href="/?page=shop&action=add&id={{ player.id }}" class="button-link">Add to Cart</a>
+    <div class="club-info">
+
+        {% if players is not empty %}
+            <h2>{{ players[0].clubName }}</h2>
+            <p>Founded in: {{ players[0].clubFounded }}</p>
+            <p>Address: {{ players[0].clubAddress }}</p>
+            <a href="{{ players[0].clubWebsite }}">Website</a>
+        {% endif %}
+
+
     </div>
-    {% endfor %}
-</div>
+    <div class="header">
+        <div class="search-container">
+            <form action="" method="POST">
+                <input type="text" class="search-bar" name="search" placeholder="Search for team..." id="search">
+                <button type="submit" class="search-button">Search</button>
+            </form>
+        </div>
+    </div>
+
+    {% if user is empty %}
+    <div class="header-buttons">
+        <a href="/?page=login" class="login-button">Login</a>
+        <a href="/?page=registration" class="register-button">Register</a>
+{% endif  %}
+        {% if user is not empty %}
+        <div class="header-buttons">
+        <a href="#" class="basket-button">
+            <img src="https://icons.veryicon.com/png/o/system/dan_system/shopping-basket-11.png" alt="Shopping Basket"
+                 style=" width: 16px; height: 16px;">
+            Basket
+        </a>
+    </div>
+        {% endif %}
+
+    </div>
+    <div class="container">
+        {% for player in players %}
+            <div class="product">
+                <img src="{{ player.clubEmblem }}" alt="{{ player.name }}">
+                <div class="product-info">
+                    <h2 class="product-title">{{ player.name }} Trikot</h2>
+                    <p class="product-details">
+                        <span>{{ player.nationality }}</span><br>
+                        <span>{{ player.dateOfBirth }}</span><br>
+                    </p>
+                    <p class="product-price">$29.99</p>
+                </div>
+                <a href="/?page=shop&action=add&id={{ player.id }}" class="button-link">Add to Cart</a>
+            </div>
+        {% endfor %}
+    </div>
 </body>
 </html>

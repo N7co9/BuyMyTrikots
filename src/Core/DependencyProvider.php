@@ -2,6 +2,7 @@
 
 namespace App\Core;
 
+use App\Core\DTO\ClientDTO;
 use App\Core\Mapper\ClientMapper;
 use App\Model\ClientEntityManager;
 use App\Model\ClientRepository;
@@ -17,5 +18,7 @@ class DependencyProvider
         $container->set(ClientEntityManager::class, new ClientEntityManager(new ClientMapper()));
         $container->set(ClientMapper::class, new ClientMapper());
         $container->set(ClientValidator::class, new ClientValidator());
+        $container->set(SearchEngine::class, new SearchEngine());
+        $container->set(ClientDTO::class, new ClientDTO());
     }
 }

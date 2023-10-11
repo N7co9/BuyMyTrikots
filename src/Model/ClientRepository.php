@@ -24,7 +24,7 @@ class ClientRepository
     public function checkLoginCredentials(ClientDTO $clientDTO): bool
     {
         $userDTO = $this->findByMail($clientDTO->email);
-        if ($userDTO instanceof ClientDTO && password_verify($userDTO->password, $clientDTO->password)) {
+        if ($userDTO instanceof ClientDTO && password_verify($clientDTO->password, $userDTO->password)) {
             return true;
         }
         return false;

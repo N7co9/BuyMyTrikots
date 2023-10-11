@@ -19,9 +19,10 @@
         .registration-form {
             background-color: #fff;
             padding: 20px;
-            border-radius: 5px;
+            border-radius: 10px; /* Rounded corners on all sides */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            width: 300px;
+            width: 400px;
+            text-align: center;
         }
 
         .registration-form h2 {
@@ -34,7 +35,7 @@
         }
 
         .registration-form input {
-            width: 100%;
+            width: 80%; /* Set input field width to 100% of container */
             padding: 10px;
             margin-top: 5px;
             border: 1px solid #ccc;
@@ -54,32 +55,37 @@
         .registration-form button:hover {
             background-color: #0056b3;
         }
+
+        .error-message {
+            color: red;
+        }
     </style>
 </head>
 <body>
 
-
 <div class="registration-form">
     <h2>Registration</h2>
     <form action="" method="POST">
-        <label for="name">Name</label><br>
-        <input type="text" value="{{ vName }}" id="name" name="name"><br>
-        <label for="mail">E-Mail</label><br>
-        <input type="text" value="{{ vMail }}" id="mail" name="mail"><br>
-        <label for="password">Password</label><br>
-        <input type="password" id="password" name="password"><br>
+        <label for="name">Enter a username</label>
+        <input type="text" value="{{ vName }}" id="name" name="name">
+        <label for="mail">Enter an email</label>
+        <input type="text" value="{{ vMail }}" id="mail" name="mail">
+        <label for="password">Enter a password</label>
+        <input type="password" id="password" name="password">
 
         <button type="submit">Register</button>
     </form>
+
+    {% for error in errors %}
+        <p class="error-message">{{ error.message }}</p>
+    {% endfor %}
+
+    {% if not ePass %}
+        <p class="error-message">{{ error }}</p>
+    {% endif %}
+
+    <p>Need to go back to the Homepage? Click <a href="/?page=shop&id=3">here</a>!</p>
 </div>
-
-{% for error in errors %}
-    <p style="color: red">{{ error.message }}</p>
-{% endfor %}
-
-{% if not ePass %}
-    <p style="color: red">{{ error }}</p>
-{% endif %}
 
 </body>
 </html>
