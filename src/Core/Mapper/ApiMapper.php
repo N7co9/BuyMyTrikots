@@ -10,7 +10,7 @@ class ApiMapper
     public function Map($array) : array
     {
         $list = [];
-        foreach ($array['squad'] as $item)
+        foreach ($array['squad'] ?? [] as $item)
         {
             $DTO = new PlayerDTO();
             $DTO->id = $item['id'];

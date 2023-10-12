@@ -16,6 +16,6 @@ class ClientLogoutController implements ControllerInterface
     {
         session_start();
         session_destroy();
-        header('Location: http://localhost:8000/?page=shop&id=3');
+        header('Location: http://localhost:8000/?page=shop');
     }
 }

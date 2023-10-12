@@ -29,4 +29,11 @@ public function setUp(): void
 
         self::assertSame('', $quantity);
     }
+    public function testGetBasketTotal() : void
+    {
+        $_SESSION['mail'] = 'validation@validation.com';
+        $total = $this->basketRepository->getBasketTotal();
+
+        self::assertSame('', $total);
+    }
 }

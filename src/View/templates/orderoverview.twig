@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Overview</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .overview-section {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .section-content {
+            width: 48%;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-back {
+            background-color: #aaa;
+            color: #fff;
+        }
+
+        .btn-buy {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .payment-option {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <h2>Order Overview</h2>
+    <form action="/?page=thank-you" method="POST">
+
+    <!-- Basket & Billing Info -->
+    <div class="overview-section">
+        <!-- Basket Info -->
+        <div class="section-content">
+            <h3>Basket</h3>
+            <!-- Display the basket items. Example: -->
+            {% for product in basket %}
+            <p> {{ product.name }} - ${{ product.price }} x{{ product.quantity }}</p>
+            {% endfor %}
+            <hr>
+            <p>Total: ${{ order.totalDue }} (incl. delivery fee)</p>
+        </div>
+
+
+        <!-- Billing Info -->
+        <div class="section-content">
+            <h3>Billing Address</h3>
+            <p>First Name: {{ order.firstName }}</p>
+            <p>Last Name: {{ order.lastName }}</p>
+            <p>Email: {{ order.email }}</p>
+            <p>Address: {{ order.address }}</p>
+            <p>City & Zip-Code: {{ order.city }}, {{ order.zip }}</p>
+        </div>
+    </div>
+
+    <!-- Payment Options -->
+        <div>
+            <h3>Payment Options</h3>
+            <div class="payment-options">
+                <label class="payment-option">
+                    <input type="radio" name="payment" value="Bank-Transfer" checked> Bank Transfer
+                </label>
+                <label class="payment-option">
+                    <input type="radio" name="payment" value="Paypal"> PayPal
+                </label>
+            </div>
+        </div>
+
+    <!-- Actions -->
+        <div class="actions">
+            <a href="/?page=checkout" class="btn btn-back">Go back</a>
+            <!-- Changed this to a submit button for the form -->
+            <button type="submit" class="btn btn-buy">Buy now</button>
+        </div>
+    </form>
+</div>
+</body>
+
+</html>

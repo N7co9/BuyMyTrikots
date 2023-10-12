@@ -22,7 +22,7 @@ class ClientLoginController implements ControllerInterface
         $this->clientDTO = $container->get(ClientDTO::class);
     }
 
-    public function dataConstruct(): object
+    public function dataConstruct(): TemplateEngine
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->clientDTO->email = $_POST['mail'] ?? '';

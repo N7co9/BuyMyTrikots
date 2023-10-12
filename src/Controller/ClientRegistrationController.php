@@ -3,10 +3,10 @@
 namespace App\Controller;
 
 use App\Core\Container;
-use App\Core\ClientValidator;
 use App\Core\DTO\ClientDTO;
 use App\Core\DTO\ErrorDTO;
 use App\Core\TemplateEngine;
+use App\Core\Validation\ClientValidator;
 use App\Model\ClientEntityManager;
 use App\Model\ClientRepository;
 
@@ -26,7 +26,7 @@ class ClientRegistrationController implements ControllerInterface
         $this->validator = $container->get(ClientValidator::class);
     }
 
-    public function dataConstruct(): object
+    public function dataConstruct(): TemplateEngine
     {
         $clientDTO = new ClientDTO();
         $clientDTO->username = ($_POST['name'] ?? '');

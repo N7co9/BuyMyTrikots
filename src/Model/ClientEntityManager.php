@@ -12,8 +12,7 @@ class ClientEntityManager
     public ClientRepository $clientRepository;
     public BasketRepository $basketRepository;
 
-    public function __construct(
-    )
+    public function __construct()
     {
         $this->clientRepository = new ClientRepository();
         $this->sqlConnector = new SqlConnector();
@@ -33,9 +32,9 @@ class ClientEntityManager
         return $this->sqlConnector->executeInsertQuery($query, $params);
     }
 
-    public function addToBasket($itemID, $userID) : string
+    public function addToBasket($itemID, $userID): string
     {
-        if(empty($this->basketRepository->getItemQuantity($itemID))){
+        if (empty($this->basketRepository->getItemQuantity($itemID))) {
             $query = "INSERT INTO user_baskets (item_id, user_id) VALUES (:item_id, :user_id)";
 
             $params = [
@@ -47,10 +46,9 @@ class ClientEntityManager
         return $this->increaseQuantity($itemID, $userID);
     }
 
-    public function removeFromBasket($itemID, $userID) : string
+    public function removeFromBasket($itemID, $userID): string
     {
-        if(empty($this->basketRepository->getItemQuantity($itemID)) || $this->basketRepository->getItemQuantity($itemID) === [0 => ['quantity' => '0']])
-        {
+        if (empty($this->basketRepository->getItemQuantity($itemID)) || $this->basketRepository->getItemQuantity($itemID) === [0 => ['quantity' => '1']]) {
             $query = "DELETE FROM user_baskets WHERE item_id = :item_id AND user_id = :user_id";
 
             $params = [
@@ -61,9 +59,9 @@ class ClientEntityManager
             return $this->sqlConnector->executeDeleteQuery($query, $params);
         }
         return $this->decreaseQuantity($itemID, $userID);
-        }
+    }
 
-    public function increaseQuantity($itemID, $userID) : string
+    public function increaseQuantity($itemID, $userID): string
     {
         $query = "UPDATE user_baskets SET quantity = :quantity WHERE user_id = :user_id AND item_id = :item_id";
 
@@ -76,17 +74,18 @@ class ClientEntityManager
             ':quantity' => $quantity,
         ];
 
-        return $this->sqlConnector->executeInsertQuery($query,  $params);
+        return $this->sqlConnector->executeInsertQuery($query, $params);
     }
-    public function decreaseQuantity($itemID, $userID) : string
+
+    public function decreaseQuantity($itemID, $userID): string
     {
         $query = "UPDATE user_baskets SET quantity = :quantity WHERE user_id = :user_id AND item_id = :item_id";
 
         $arrayWithQuantity = $this->basketRepository->getItemQuantity($itemID);
 
-        if ($arrayWithQuantity[0]['quantity'] >= 1){
+        if ($arrayWithQuantity[0]['quantity'] >= 1) {
             $quantity = $arrayWithQuantity[0]['quantity'] - 1;
-        }else{
+        } else {
             $quantity = $arrayWithQuantity[0]['quantity'];
         }
 
@@ -96,6 +95,17 @@ class ClientEntityManager
             ':quantity' => $quantity,
         ];
 
-        return $this->sqlConnector->executeInsertQuery($query,  $params);
+        return $this->sqlConnector->executeInsertQuery($query, $params);
+    }
+
+    public function emptyBasket(): string
+    {
+        $userID = $this->clientRepository->getUserID($_SESSION['mail']);
+        $query = "DELETE FROM user_baskets WHERE user_id = :user_id";
+
+        $params = [
+            ':user_id' => $userID
+        ];
+        return $this->sqlConnector->executeDeleteQuery($query, $params);
     }
 }

@@ -19,11 +19,11 @@ class HomepageController implements ControllerInterface
         $this->searchEngine = $container->get(SearchEngine::class);
     }
 
-    public function dataConstruct()
+    public function dataConstruct() : TemplateEngine
     {
         $this->searchEngine->search();
 
-        $teamID = $_GET['id'];
+        $teamID = $_GET['id'] ?? null;
 
         $user = $_SESSION['mail'] ?? '';
 

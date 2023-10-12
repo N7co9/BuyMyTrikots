@@ -152,24 +152,45 @@
         .club-info p {
             font-size: 16px;
         }
+
+        .header-title-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logout-button {
+            background-color: #f36f6f; /* Change color to your preference */
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+
+        .logout-button:hover {
+            background-color: #e04545;
+        }
     </style>
 </head>
 <body>
 <header>
     <h1># BuyMyTrikots - Trikot Webshop #</h1>
 </header>
-<div class="container">
-    <div class="club-info">
 
-        {% if players is not empty %}
+
+<div class="container">
+    {% if players is not empty %}
+        <div class="club-info">
             <h2>{{ players[0].clubName }}</h2>
             <p>Founded in: {{ players[0].clubFounded }}</p>
             <p>Address: {{ players[0].clubAddress }}</p>
             <a href="{{ players[0].clubWebsite }}">Website</a>
-        {% endif %}
+        </div>
+    {% endif %}
 
-
-    </div>
     <div class="header">
         <div class="search-container">
             <form action="" method="POST">
@@ -179,22 +200,22 @@
         </div>
     </div>
 
-    {% if user is empty %}
     <div class="header-buttons">
-        <a href="/?page=login" class="login-button">Login</a>
-        <a href="/?page=registration" class="register-button">Register</a>
-{% endif  %}
-        {% if user is not empty %}
-        <div class="header-buttons">
-        <a href="/?page=basket" class="basket-button">
-            <img src="https://icons.veryicon.com/png/o/system/dan_system/shopping-basket-11.png" alt="Shopping Basket"
-                 style=" width: 16px; height: 16px;">
-            Basket
-        </a>
-    </div>
+        {% if user is empty %}
+            <a href="/?page=login" class="login-button">Login</a>
+            <a href="/?page=registration" class="register-button">Register</a>
+        {% else %}
+            <!-- Logout button -->
+            <a href="/?page=logout" class="logout-button">Logout</a>
+            <a href="/?page=basket" class="basket-button">
+                <img src="https://icons.veryicon.com/png/o/system/dan_system/shopping-basket-11.png"
+                     alt="Shopping Basket"
+                     style=" width: 16px; height: 16px;">
+                Basket
+            </a>
         {% endif %}
-
     </div>
+
     <div class="container">
         {% for player in players %}
             <div class="product">
@@ -207,9 +228,12 @@
                     </p>
                     <p class="product-price">$29.99</p>
                 </div>
-                <a href="/?page=basket&action=add&id={{ player.id }}" class="button-link">Add to Cart</a>
+                {% if user is not empty %}
+                    <a href="/?page=basket&action=add&id={{ player.id }}" class="button-link">Add to Cart</a>
+                {% endif %}
             </div>
         {% endfor %}
     </div>
+
 </body>
 </html>

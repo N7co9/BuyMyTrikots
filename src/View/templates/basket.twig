@@ -110,7 +110,7 @@
 <div class="basket-container">
     <div class="basket-header">
         <h2>Your Basket</h2>
-        <p>Total: $100</p>
+        <p>Total: ${{ total }}</p>
     </div>
 
     {% for product in contents %}
@@ -130,11 +130,11 @@
         {% endif %}
 {% endfor %}
 
-<a href="#" class="checkout-btn">Checkout</a>
+<a href="/?page=checkout" class="checkout-btn">Checkout</a>
 </div>
 
 <div class="back-home">
-    Want to go back to the <a href="/?page=shop&id=3">homepage</a>?
+    Want to go back to the <a href="/?page=shop">homepage</a>?
 </div>
 
 </body>

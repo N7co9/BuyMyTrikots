@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Core;
+namespace App\Core\Validation;
 
 use App\Core\DTO\ErrorDTO;
+
 class ClientValidator
 {
     public function validate($userDTO): array

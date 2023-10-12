@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f9fc;
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+            color: #555;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1, h2 {
+            color: #333;
+            margin: 20px 0;
+            font-weight: lighter;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-top: 50px;
+        }
+
+        h2 {
+            font-size: 1.8em;
+        }
+
+        h3 {
+            color: #444;
+            font-size: 1.5em;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        .section {
+            background-color: #fff;
+            margin: 20px 0;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        .details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .details p {
+            flex: 1;
+            margin: 10px 5px;
+        }
+
+        .basket-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+        }
+
+        .continue-shopping {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .continue-shopping:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        strong {
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Thank You!</h1>
+    <h2>Your order has been processed. Order ID: {{ orderID }}</h2>
+
+    <!-- Billing Address Summary -->
+    <div class="section">
+        <h3>Billing Details</h3>
+        <div class="details">
+            <p><strong>Name:</strong> {{ order.firstName }} {{ order.lastName }}</p>
+            <p><strong>Address:</strong> {{ order.address }}</p>
+            <p><strong>City:</strong> {{ order.city }}</p>
+            <p><strong>Zip Code:</strong> {{ order.zip }}</p>
+        </div>
+        <p><strong>Delivery Option:</strong> {{ order.delivery }}</p>
+        <p><strong>Payment Method:</strong> {{ order.paymentMethod }}</p>
+    </div>
+
+    <!-- Basket Summary -->
+    <div class="section">
+        <h3>Your Basket</h3>
+
+        {% for product in basket %}
+            <div class="basket-item">
+                <span>{{ product.name }}</span>
+                <span>${{ product.price }}</span>
+                <span>x{{ product.quantity }}</span>
+            </div>
+        {% endfor %}
+
+        <h3><strong>Total: </strong>${{ order.totalDue }}</h3>
+        <a href="/?page=shop" class="continue-shopping">Continue Shopping</a>
+    </div>
+
+</div>
+
+</body>
+</html>

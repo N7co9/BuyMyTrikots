@@ -4,11 +4,9 @@ namespace App\Controller;
 
 use App\Core\Basket\BasketManipulator;
 use App\Core\Container;
-use App\Core\DTO\BasketDTO;
 use App\Core\TemplateEngine;
 use App\Model\BasketRepository;
-use App\Model\ClientEntityManager;
-use App\Model\ClientRepository;
+
 
 class BasketController implements ControllerInterface
 {
@@ -37,8 +35,10 @@ class BasketController implements ControllerInterface
         }
 
         $basketContent = $this->basketRepository->getBasketInfo();
+        $total = $this->basketRepository->getBasketTotal();
 
         $this->templateEngine->addParameter('contents', $basketContent);
+        $this->templateEngine->addParameter('total', $total);
         $this->templateEngine->setTemplate('basket.twig');
 
         return $this->templateEngine;
