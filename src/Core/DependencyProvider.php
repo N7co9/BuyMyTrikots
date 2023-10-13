@@ -5,6 +5,8 @@ namespace App\Core;
 use App\Core\Basket\BasketManipulator;
 use App\Core\DTO\ClientDTO;
 use App\Core\Mapper\ClientMapper;
+use App\Core\Redirect\Redirect;
+use App\Core\Redirect\RedirectSpy;
 use App\Core\Validation\BillingValidator;
 use App\Core\Validation\ClientValidator;
 use App\Model\BasketRepository;
@@ -24,13 +26,13 @@ class DependencyProvider
         $container->set(ClientEntityManager::class, new ClientEntityManager(new ClientMapper()));
         $container->set(ClientMapper::class, new ClientMapper());
         $container->set(ClientValidator::class, new ClientValidator());
-        $container->set(SearchEngine::class, new SearchEngine());
+        $container->set(SearchEngine::class, new SearchEngine(new Redirect(new RedirectSpy())));
         $container->set(ClientDTO::class, new ClientDTO());
         $container->set(BasketRepository::class, new BasketRepository());
         $container->set(BasketManipulator::class, new BasketManipulator());
         $container->set(OrderRepository::class, new OrderRepository());
         $container->set(OrderEntityManager::class, new OrderEntityManager());
-        $container->set(BillingValidator::class, new BillingValidator());
+        $container->set(BillingValidator::class, new BillingValidator(new Redirect(new RedirectSpy())));
 
     }
 }

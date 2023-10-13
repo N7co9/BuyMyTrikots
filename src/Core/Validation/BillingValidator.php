@@ -3,9 +3,17 @@
 namespace App\Core\Validation;
 
 use App\Core\DTO\ErrorDTO;
+use App\Core\Redirect\Redirect;
+use App\Core\Redirect\RedirectSpy;
 
 class BillingValidator
 {
+    public Redirect $redirect;
+
+    public function __construct(Redirect $redirect)
+    {
+        $this->redirect = $redirect;
+    }
     public function validate($billingInformation): array
     {
         $errorDTOList = [];
@@ -22,7 +30,7 @@ class BillingValidator
     public function redirectIfValid($array): void
     {
         if (isset($_POST['delivery']) && empty($array)) {
-            header('Location: /?page=order-overview');
+            $this->redirect->to('?page=order-overview');
         }
     }
 

@@ -25,14 +25,4 @@ class ClientMapper
         }
         return $userDTO ?? null;
     }
-
-    public function mapFromDto2Array(ClientDTO $userDTO): array
-    {
-        return array(
-            "id" => $userDTO->id,
-            "username" => $userDTO->username,
-            "email" => $userDTO->email,
-            "password" => $userDTO->password,
-        );
-    }
 }

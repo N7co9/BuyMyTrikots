@@ -4,7 +4,7 @@ namespace App\Core\API;
 
 class ApiCache {
 
-    private $cacheFileDir = __DIR__. '/ApiCache/';  // Choose your directory path
+    public $cacheFileDir = __DIR__. '/ApiCache/';  // Choose your directory path
     private $apiHandler;
     private $cacheDuration = 3600; // Cache duration in seconds (1 hour)
 

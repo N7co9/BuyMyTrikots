@@ -85,14 +85,12 @@ class ClientEntityManager
 
         if ($arrayWithQuantity[0]['quantity'] >= 1) {
             $quantity = $arrayWithQuantity[0]['quantity'] - 1;
-        } else {
-            $quantity = $arrayWithQuantity[0]['quantity'];
         }
 
         $params = [
             ':item_id' => $itemID,
             ':user_id' => $userID,
-            ':quantity' => $quantity,
+            ':quantity' => $quantity ?? 0,
         ];
 
         return $this->sqlConnector->executeInsertQuery($query, $params);

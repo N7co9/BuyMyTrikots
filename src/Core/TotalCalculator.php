@@ -27,7 +27,6 @@ class TotalCalculator
             {
                 $total = $this->basketRepository->getBasketTotal() + 9.95;
             }
-
         }
         return $total;
     }
