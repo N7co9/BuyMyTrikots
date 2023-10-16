@@ -5,6 +5,8 @@ namespace App\Controller;
 
 use App\Core\Container;
 use App\Core\DTO\ClientDTO;
+use App\Core\Redirect\Redirect;
+use App\Core\Redirect\RedirectSpy;
 use App\Core\TemplateEngine;
 use App\Model\ClientRepository;
 
@@ -14,12 +16,16 @@ class ClientLoginController implements ControllerInterface
     private TemplateEngine $templateEngine;
     private ClientRepository $clientRepository;
     private ClientDTO $clientDTO;
+    private Redirect $redirect;
+    public RedirectSpy $redirectSpy;
 
     public function __construct(Container $container)
     {
         $this->templateEngine = $container->get(TemplateEngine::class);
         $this->clientRepository = $container->get(ClientRepository::class);
         $this->clientDTO = $container->get(ClientDTO::class);
+        $this->redirectSpy = new RedirectSpy();
+        $this->redirect = new Redirect($this->redirectSpy);
     }
 
     public function dataConstruct(): TemplateEngine
@@ -33,7 +39,7 @@ class ClientLoginController implements ControllerInterface
             if ($verify === true) {
                 $_SESSION['mail'] = $_POST['mail'];
                 $feedback = 'success';
-                header('Location: http://localhost:8000/?page=shop&id=3');
+                $this->redirect->to('?page=shop');
             } else {
                 $feedback = 'not a valid combination';
             }

@@ -3,19 +3,23 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Core\Container;
+use App\Core\Redirect\Redirect;
+use App\Core\Redirect\RedirectSpy;
 
 class ClientLogoutController implements ControllerInterface
 {
-
-    public function __construct(Container $container)
+    public Redirect $redirect;
+    public RedirectSpy $redirectSpy;
+    public function __construct()
     {
+        $this->redirectSpy = new RedirectSpy();
+        $this->redirect = new Redirect($this->redirectSpy);
     }
 
     public function dataConstruct(): void
     {
-        session_start();
         session_destroy();
-        header('Location: http://localhost:8000/?page=shop');
+        session_start();
+        $this->redirect->to('?page=shop');
     }
 }
