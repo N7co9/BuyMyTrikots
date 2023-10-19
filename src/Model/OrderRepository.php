@@ -33,7 +33,7 @@ class OrderRepository
 
         $billingArray = $this->sessionHandler->getOrderSession();
 
-        $billingArray['totalDue'] = $this->calculator->calculateTotal() ?? 0.00;
+        $billingArray['totalDue'] = $this->calculator->calculateTotal();
 
         return $this->billingMapper->mapBilling($billingArray);
     }
