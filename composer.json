@@ -7,10 +7,16 @@
     "require": {
         "ext-json": "*",
         "twig/twig": "^3.0",
-        "ext-pdo": "*",
-        "phpunit/phpunit": "^10.4"
+        "ext-pdo": "*"
     },
     "require-dev": {
-        "roave/security-advisories": "dev-latest"
+        "phpunit/phpunit": "^10.4",
+        "roave/security-advisories": "dev-latest",
+        "infection/infection": "^0.27.6"
+    },
+    "config": {
+        "allow-plugins": {
+            "infection/extension-installer": true
+        }
     }
 }

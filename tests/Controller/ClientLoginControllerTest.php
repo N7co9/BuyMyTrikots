@@ -3,43 +3,40 @@
 namespace Controller;
 
 use App\Controller\ClientLoginController;
-use App\Controller\ClientRegistrationController;
 use App\Core\Container;
 use App\Core\DependencyProvider;
 use App\Core\DTO\ClientDTO;
+use App\Core\Redirect\Redirect;
 use App\Core\Redirect\RedirectSpy;
 use App\Core\SQL\SqlConnector;
 use App\Model\ClientEntityManager;
-use PhpParser\Lexer\TokenEmulator\NumericLiteralSeparatorEmulator;
 use PHPUnit\Framework\TestCase;
 use function PHPUnit\Framework\assertSame;
 
 class ClientLoginControllerTest extends TestCase
 {
+    public SqlConnector $sqlConnector;
     public RedirectSpy $redirectSpy;
     public ClientLoginController $clientLoginController;
     public ClientEntityManager $clientEntityManager;
     protected function setUp(): void
     {
-        $this->sqlConnector = new SqlConnector();
-
-        $containerBuilder = new Container();
-        $dependencyProvider = new DependencyProvider();
-        $dependencyProvider->provide($containerBuilder);
-
-        $this->clientEntityManager = new ClientEntityManager();
+        $this->sqlconnector = new SqlConnector();
         $this->redirectSpy = new RedirectSpy();
 
-        $this->container = $containerBuilder;
-        $this->construct = new ClientLoginController($this->container);
+        $container = new Container();
+        $dependencyProvider = new DependencyProvider();
+        $dependencyProvider->provide($container);
+        $container->set(Redirect::class, $this->redirectSpy);
+
+        $this->clientEntityManager = new ClientEntityManager();
 
         $clientDTO = new ClientDTO();
         $clientDTO->email = 'TEST@TEST.com';
         $clientDTO->password = '$2y$10$d9nKafUjEIkwJGRTM0pUcec9papz3UojboRwnzV10yomN0qM3mWha';
         $this->clientEntityManager->saveCredentials($clientDTO);
 
-
-
+        $this->clientLoginController = new ClientLoginController($container);
         parent::setUp();
     }
     public function testDataConstructValid(): void
@@ -49,36 +46,36 @@ class ClientLoginControllerTest extends TestCase
         $_POST['mail'] = 'TEST@TEST.com';
         $_POST['password'] = 'Xyz12345*';
 
-        $this->construct->dataConstruct();
+        $this->clientLoginController->dataConstruct();
 
-        self::assertContains('http://localhost:8000/?page=shop', $this->construct->redirectSpy->capturedHeaders);
-        self::assertSame(['feedback' => 'success'], $this->construct->dataConstruct()->getParameters());
-        assertSame('login.twig', $this->construct->dataConstruct()->getTpl());
+        self::assertSame('?page=shop', $this->clientLoginController->redirect->location);
+        self::assertSame(['feedback' => 'success'], $this->clientLoginController->dataConstruct()->getParameters());
+        assertSame('login.twig', $this->clientLoginController->dataConstruct()->getTpl());
     }
     public function testDataConstructInvalidRequestMethod(): void
     {
         $_SERVER['REQUEST_METHOD'] = 'GET';
 
 
-        assertSame(['feedback' => ''], $this->construct->dataConstruct()->getParameters());
+        assertSame(['feedback' => ''], $this->clientLoginController->dataConstruct()->getParameters());
     }
 
     public function testDataConstructInvalidCombination(): void
     {
         $_SERVER['REQUEST_METHOD'] = 'POST';
 
-        $this->construct->dataConstruct();
+        $this->clientLoginController->dataConstruct();
 
-        unset($_POST['mail']);
-        unset($_POST['password']);
+        unset($_POST['mail'], $_POST['password']);
 
 
-        assertSame(['feedback' => 'not a valid combination'], $this->construct->dataConstruct()->getParameters());
+        assertSame(['feedback' => 'not a valid combination'], $this->clientLoginController->dataConstruct()->getParameters());
     }
 
 
     public function tearDown(): void
     {
+        $this->sqlConnector = new SqlConnector();
         $this->sqlConnector->executeDeleteQuery("DELETE FROM user_baskets;", []);
         $this->sqlConnector->executeDeleteQuery("DELETE FROM users;", []);
         $this->sqlConnector->closeConnection();

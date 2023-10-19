@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Core\Container;
 use App\Core\SearchEngine;
+use App\Core\Session\SessionHandler;
 use App\Core\TemplateEngine;
 use App\Model\PlayerRepository;
 
@@ -12,8 +13,10 @@ class HomepageController implements ControllerInterface
     private TemplateEngine $templateEngine;
     private PlayerRepository $playerRepository;
     private SearchEngine $searchEngine;
+    private SessionHandler $sessionHandler;
     public function __construct(Container $container)
     {
+        $this->sessionHandler = $container->get(SessionHandler::class);
         $this->templateEngine = $container->get(TemplateEngine::class);
         $this->playerRepository = $container->get(PlayerRepository::class);
         $this->searchEngine = $container->get(SearchEngine::class);
@@ -25,7 +28,7 @@ class HomepageController implements ControllerInterface
 
         $teamID = $_GET['id'] ?? null;
 
-        $user = $_SESSION['mail'] ?? '';
+        $user = $this->sessionHandler->getSessionMail();
 
         $players = $this->playerRepository->getPlayers($teamID);
 

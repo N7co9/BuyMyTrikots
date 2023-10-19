@@ -3,12 +3,13 @@
 namespace App\Core;
 
 use App\Core\Redirect\Redirect;
+use App\Core\Redirect\RedirectInterface;
 use App\Core\Redirect\RedirectSpy;
 
 class SearchEngine
 {
-    public Redirect $redirect;
-    public function __construct(Redirect $redirect)
+    public RedirectInterface $redirect;
+    public function __construct(RedirectInterface $redirect)
     {
         $this->redirect = $redirect;
     }

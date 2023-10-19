@@ -7,6 +7,10 @@ use App\Core\DTO\PlayerDTO;
 
 class ApiMapper
 {
+    /**
+     * @param $array
+     * @return PlayerDTO[]
+     */
     public function Map($array) : array
     {
         $list = [];

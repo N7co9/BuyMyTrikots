@@ -5,7 +5,10 @@ namespace Controller;
 use App\Controller\ClientLoginController;
 use App\Controller\ClientLogoutController;
 use App\Core\DependencyProvider;
+use App\Core\Redirect\Redirect;
 use App\Core\Redirect\RedirectSpy;
+use App\Core\Redirect\ReSpy;
+use App\Core\Session\SessionHandler;
 use App\Core\SQL\SqlConnector;
 use PHPUnit\Framework\TestCase;
 use App\Core\Container;
@@ -13,21 +16,32 @@ use App\Core\Container;
 class ClientLogoutControllerTest extends TestCase
 {
     public RedirectSpy $redirectSpy;
+    private ClientLogoutController $clientLogoutController;
+    private SessionHandler $sessionHandler;
+
     protected function setUp(): void
     {
+        $this->sessionHandler = new SessionHandler();
         $this->redirectSpy = new RedirectSpy();
-        $this->construct = new ClientLogoutController();
+
+        $container = new Container();
+        $container->set(Redirect::class, $this->redirectSpy);
+        $container->set(SessionHandler::class, new SessionHandler());
+
+        $this->clientLogoutController = new ClientLogoutController($container);
+
         parent::setUp();
     }
 
     public function testDataConstruct(): void
     {
-        session_start();
+        $this->sessionHandler->setSession('mail@mail.com');
         $id = session_id();
-        $this->construct->dataConstruct();
+        $this->clientLogoutController->dataConstruct();
         $newId = session_id();
+
         self::assertNotSame($newId, $id);
-        self::assertContains('http://localhost:8000/?page=shop', $this->construct->redirectSpy->capturedHeaders);
+        self::assertSame('?page=shop', $this->clientLogoutController->redirect->location);
     }
     public function tearDown(): void
     {

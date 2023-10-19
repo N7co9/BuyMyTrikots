@@ -2,21 +2,25 @@
 
 namespace Core;
 
+use App\Core\Container;
+use App\Core\Redirect\RedirectInterface;
 use App\Core\SearchEngine;
 use App\Core\Redirect\Redirect;
 use App\Core\Redirect\RedirectSpy;
 use PHPUnit\Framework\TestCase;
-use function PHPUnit\Framework\assertContains;
 
 class SearchEngineTest extends TestCase
 {
-    private RedirectSpy $redirectSpy;
+    public RedirectInterface $redirect;
     private SearchEngine $searchEngine;
+    public RedirectSpy $redirectSpy;
 
     protected function setUp(): void
     {
         $this->redirectSpy = new RedirectSpy();
-        $this->searchEngine = new SearchEngine(new Redirect($this->redirectSpy));
+
+
+        $this->searchEngine = new SearchEngine($this->redirectSpy);
     }
 
     public function testSearchWithTerm(): void
@@ -24,7 +28,7 @@ class SearchEngineTest extends TestCase
         $_POST['search'] = '3';
         $this->searchEngine->search();
 
-        assertContains('http://localhost:8000/?page=shop&id=3', $this->redirectSpy->capturedHeaders);
+        self::assertSame('?page=shop&id=3', $this->searchEngine->redirect->location);
     }
 
     public function testSearchWithEmptyTerm(): void
@@ -32,6 +36,6 @@ class SearchEngineTest extends TestCase
         $_POST['search'] = '';
         $this->searchEngine->search();
 
-        $this->assertEmpty($this->redirectSpy->capturedHeaders);
+        $this->assertEmpty($this->searchEngine->redirect->location);
     }
 }

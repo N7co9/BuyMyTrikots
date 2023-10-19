@@ -2,12 +2,12 @@
 
 namespace App\Core\Redirect;
 
-class RedirectSpy
+class RedirectSpy implements RedirectInterface
 {
-    public array $capturedHeaders = [];
-
-    public function sendHeader(string $header)
+    public string $location = '';
+    public function to(string $location): void
     {
-        $this->capturedHeaders[] = $header;
+        $this->location = $location;
     }
+
 }

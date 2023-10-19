@@ -4,6 +4,7 @@ namespace App\Model;
 
 use App\Core\DTO\OrderDTO;
 use App\Core\Mapper\BillingMapper;
+use App\Core\Session\SessionHandler;
 use App\Core\SQL\SqlConnector;
 use App\Core\TotalCalculator;
 
@@ -13,6 +14,7 @@ class OrderRepository
     private BillingMapper $billingMapper;
     private SqlConnector $sqlConnector;
     private ClientRepository $clientRepository;
+    private SessionHandler $sessionHandler;
 
     public function __construct()
     {
@@ -20,29 +22,18 @@ class OrderRepository
         $this->billingMapper = new BillingMapper();
         $this->sqlConnector = new SqlConnector();
         $this->clientRepository = new ClientRepository();
+        $this->sessionHandler = new SessionHandler();
     }
 
     public function getOrderInformation(): OrderDTO
     {
         $dataKeys = ["first_name", "last_name", "address", "city", "zip", "payment", "delivery"];
 
-        foreach ($dataKeys as $key) {
-            if (isset($_POST[$key])) {
-                $_SESSION[$key] = $_POST[$key];
-            }
-        }
+        $this->sessionHandler->setOrderSession($dataKeys);
 
-        $billingArray = [
-            "firstName" => $_SESSION['first_name'] ?? '',
-            "lastName" => $_SESSION['last_name'] ?? '',
-            "address" => $_SESSION['address'] ?? '',
-            "city" => $_SESSION['city'] ?? '',
-            "zip" => $_SESSION['zip'] ?? '',
-            "delivery" => $_SESSION['delivery'] ?? '',
-            "totalDue" => $this->calculator->calculateTotal() ?? 0.00,
-            "payment" => $_SESSION['payment'] ?? '',
-            "email" => $_SESSION['mail'] ?? ''
-        ];
+        $billingArray = $this->sessionHandler->getOrderSession();
+
+        $billingArray['totalDue'] = $this->calculator->calculateTotal() ?? 0.00;
 
         return $this->billingMapper->mapBilling($billingArray);
     }
@@ -50,7 +41,7 @@ class OrderRepository
     {
         $query = "SELECT orders.id FROM orders WHERE orders.user_id = :user_id ORDER BY orders.id DESC LIMIT 1";
 
-        $userID = $this->clientRepository->getUserID($_SESSION['mail']);
+        $userID = $this->clientRepository->getUserID($this->sessionHandler->getSessionMail());
 
         $params = [
             ":user_id" => $userID,

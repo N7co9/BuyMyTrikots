@@ -4,16 +4,18 @@ namespace App\Core\Validation;
 
 use App\Core\DTO\ErrorDTO;
 use App\Core\Redirect\Redirect;
+use App\Core\Redirect\RedirectInterface;
 use App\Core\Redirect\RedirectSpy;
 
 class BillingValidator
 {
-    public Redirect $redirect;
+    public RedirectInterface $redirect;
 
-    public function __construct(Redirect $redirect)
+    public function __construct(RedirectInterface $redirect)
     {
         $this->redirect = $redirect;
     }
+
     public function validate($billingInformation): array
     {
         $errorDTOList = [];
@@ -36,7 +38,7 @@ class BillingValidator
 
     private function validateFirstName($firstName, &$errorDTOList): void
     {
-        $firstName = trim($firstName);
+        $firstName = $this->trim($firstName);
         if (strlen($firstName) >= 30 || strlen($firstName) <= 2 ||
             !preg_match('/^[a-zA-Z\s-]+$/', $firstName)) {
             $errorDTOList[] = new ErrorDTO('Oops, your first name doesn\'t look right!');
@@ -45,7 +47,7 @@ class BillingValidator
 
     private function validateLastName($lastName, &$errorDTOList): void
     {
-        $lastName = trim($lastName);
+        $lastName = $this->trim($lastName);
         if (strlen($lastName) >= 30 || strlen($lastName) <= 2 ||
             !preg_match('/^[a-zA-Z\s-]+$/', $lastName)) {
             $errorDTOList[] = new ErrorDTO('Oops, your last name doesn\'t look right!');
@@ -54,7 +56,7 @@ class BillingValidator
 
     private function validateCity($city, &$errorDTOList): void
     {
-        $city = trim($city);
+        $city = $this->trim($city);
         if (strlen($city) >= 20 || strlen($city) <= 2 ||
             !preg_match('/^[a-zA-Z\s-]+$/', $city)) {
             $errorDTOList[] = new ErrorDTO('Oops, your City doesn\'t look right!');
@@ -63,7 +65,7 @@ class BillingValidator
 
     private function validateZip($zip, &$errorDTOList): void
     {
-        $zip = trim($zip);
+        $zip = $this->trim($zip);
         if (!preg_match('/^\d{4,6}$/', $zip)) {
             $errorDTOList[] = new ErrorDTO('Oops, your Zip-Code doesn\'t look right!');
         }
@@ -71,10 +73,15 @@ class BillingValidator
 
     private function validateAddress($address, &$errorDTOList): void
     {
-        $address = trim($address);
+        $address = $this->trim($address);
         if (strlen($address) >= 20 || strlen($address) <= 2 ||
             !preg_match('/^[a-zA-Z\s-]+$/', $address)) {
             $errorDTOList[] = new ErrorDTO('Oops, your Address doesn\'t look right!');
         }
+    }
+
+    private function trim(string $value): string
+    {
+        return trim($value);
     }
 }

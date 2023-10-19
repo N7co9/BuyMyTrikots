@@ -4,6 +4,7 @@ namespace App\Model;
 
 use App\Core\API\ApiCache;
 use App\Core\API\ApiHandling;
+use App\Core\DTO\PlayerDTO;
 use App\Core\Mapper\ApiMapper;
 
 class PlayerRepository
@@ -17,6 +18,10 @@ class PlayerRepository
         $this->mapper = new ApiMapper();
         $this->apiCache = new ApiCache($this->apiHandling);
     }
+
+    /**
+     * @return PlayerDTO[]
+     */
     public function getPlayers($teamID) : array
     {
         $rawPlayerArray = $this->apiCache->getData('players', $teamID);

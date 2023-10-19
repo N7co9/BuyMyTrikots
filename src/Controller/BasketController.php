@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Core\Basket\BasketManipulator;
 use App\Core\Container;
+use App\Core\Session\SessionHandler;
 use App\Core\TemplateEngine;
 use App\Model\BasketRepository;
 
@@ -14,8 +15,10 @@ class BasketController implements ControllerInterface
 
     private BasketRepository $basketRepository;
     private BasketManipulator $manipulator;
+    private SessionHandler $sessionHandler;
     public function __construct(Container $container)
     {
+        $this->sessionHandler = $container->get(SessionHandler::class);
         $this->templateEngine = $container->get(TemplateEngine::class);
         $this->basketRepository = $container->get(BasketRepository::class);
         $this->manipulator = $container->get(BasketManipulator::class);
@@ -30,7 +33,7 @@ class BasketController implements ControllerInterface
             'remove' => 'removeItemFromBasket'
         ];
 
-        if (!empty($_SESSION['mail']) && array_key_exists($action, $actionMap)) {
+        if (!empty($this->sessionHandler->getSessionMail()) && array_key_exists($action, $actionMap)) {
             $this->manipulator->{$actionMap[$action]}();
         }
 

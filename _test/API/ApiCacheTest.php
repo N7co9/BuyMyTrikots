@@ -1,10 +1,9 @@
 <?php
 
-namespace Core\API;
+namespace _test\API;
 
 use App\Core\API\ApiCache;
 use App\Core\API\ApiHandling;
-use mysql_xdevapi\Exception;
 use PHPUnit\Framework\TestCase;
 
 class ApiCacheTest extends TestCase
