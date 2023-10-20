@@ -35,7 +35,6 @@ class BasketRepository
             $itemInfoArray = $this->apiCache->getData('item', $item['item_id']);
             $itemInfoDTOArray [] = $this->apiMapper->MapBasket($itemInfoArray, $this->getItemQuantity($item['item_id']));
         }
-
         return $itemInfoDTOArray;
     }
     public function getItemQuantity($itemID) : array
@@ -53,7 +52,7 @@ class BasketRepository
             if($item->quantity >= 2){
                 $item->price *= $item->quantity;
             }
-            $price += $item->price;
+            $price = $item->price;
         }
         return $price ?? null;
     }

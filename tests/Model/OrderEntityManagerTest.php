@@ -70,7 +70,6 @@ class OrderEntityManagerTest extends TestCase
     }
 
 
-
     public function tearDown(): void
     {
         $connector = new SqlConnector();

@@ -61,7 +61,7 @@ class ClientEntityManager
         return $this->decreaseQuantity($itemID, $userID);
     }
 
-    public function increaseQuantity($itemID, $userID): string
+    private function increaseQuantity($itemID, $userID): string
     {
         $query = "UPDATE user_baskets SET quantity = :quantity WHERE user_id = :user_id AND item_id = :item_id";
 
@@ -77,20 +77,18 @@ class ClientEntityManager
         return $this->sqlConnector->executeInsertQuery($query, $params);
     }
 
-    public function decreaseQuantity($itemID, $userID): string
+    private function decreaseQuantity($itemID, $userID): string
     {
         $query = "UPDATE user_baskets SET quantity = :quantity WHERE user_id = :user_id AND item_id = :item_id";
 
         $arrayWithQuantity = $this->basketRepository->getItemQuantity($itemID);
 
-        if ($arrayWithQuantity[0]['quantity'] >= 1) {
-            $quantity = $arrayWithQuantity[0]['quantity'] - 1;
-        }
+        $quantity = $arrayWithQuantity[0]['quantity'] - 1;
 
         $params = [
             ':item_id' => $itemID,
             ':user_id' => $userID,
-            ':quantity' => $quantity ?? 0,
+            ':quantity' => $quantity,
         ];
 
         return $this->sqlConnector->executeInsertQuery($query, $params);

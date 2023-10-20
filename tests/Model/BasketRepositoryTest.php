@@ -31,7 +31,7 @@ class BasketRepositoryTest extends TestCase
         parent::setUp();
     }
 
-    public function testGetBasketInfo(): void
+    public function testGetBasketInfoOneItem(): void
     {
         $_SESSION['mail'] = 'TEST@TEST.com';
 
@@ -43,6 +43,25 @@ class BasketRepositoryTest extends TestCase
         self::assertSame('Cristiano Ronaldo Trikot', $basket[0]->name);
         self::assertSame('44', $basket[0]->id);
         self::assertSame('1', $basket[0]->quantity);
+    }
+
+    public function testGetBasketInfoMultipleItems(): void
+    {
+        $_SESSION['mail'] = 'TEST@TEST.com';
+
+        $this->clientEntityManager->addToBasket('44', $this->clientRepository->getUserID($_SESSION['mail']));
+        $this->clientEntityManager->addToBasket('334', $this->clientRepository->getUserID($_SESSION['mail']));
+
+
+        $basket = $this->basketRepository->getBasketInfo();
+
+        self::assertInstanceOf(BasketDTO::class, $basket[0]);
+        self::assertSame('Cristiano Ronaldo Trikot', $basket[0]->name);
+        self::assertSame('44', $basket[0]->id);
+        self::assertSame('1', $basket[0]->quantity);
+        self::assertSame('Gregor Kobel Trikot', $basket[1]->name);
+        self::assertSame('334', $basket[1]->id);
+        self::assertSame('1', $basket[1]->quantity);
     }
 
     public function testGetItemQuantity(): void

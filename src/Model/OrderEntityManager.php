@@ -30,7 +30,7 @@ class OrderEntityManager
 
         $items = $this->itemProvider->getItems();
 
-        $encodedItems= json_encode($items[0], JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT, 512);
+        $encodedItems= json_encode($items);
 
         $total = $this->totalCalculator->calculateTotal();
 

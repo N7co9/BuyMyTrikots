@@ -15,7 +15,7 @@ class OrderItemProvider
 
         $items = [];
         foreach ($basket as $item) {
-            $items[] = [
+            $items = [
                 'id'       => $item->id,
                 'quantity' => $item->quantity,
             ];

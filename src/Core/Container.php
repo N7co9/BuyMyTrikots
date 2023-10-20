@@ -20,6 +20,10 @@ class Container
 
     public function getList(): array
     {
-        return $this->object;
+        foreach ($this->object as $item)
+        {
+            $array [] = $item;
+        }
+        return $array;
     }
 }

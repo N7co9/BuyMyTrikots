@@ -9,9 +9,11 @@ class TemplateEngine implements TemplateInterface
     private Environment $twig;
     private string $tpl;
 
-    public function __construct(string $templatePath)
+    public string $templatePath;
+    public function __construct($templatePath)
     {
-        $loader = new FilesystemLoader($templatePath);
+        $this->templatePath = $templatePath;
+        $loader = new FilesystemLoader($this->templatePath);
         $this->twig = new Environment($loader);
     }
 
@@ -38,5 +40,9 @@ class TemplateEngine implements TemplateInterface
     public function getTpl(): string
     {
         return $this->tpl;
+    }
+    public function getTplPath() : string
+    {
+        return $this->templatePath;
     }
 }
