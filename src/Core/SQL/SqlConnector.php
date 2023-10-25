@@ -9,23 +9,29 @@ class SqlConnector
 {
     private ?object $pdo = null;
 
+    private string $dbName;
+
     public function __construct()
     {
     }
 
-    private function connect(): void
+    public function connect(): void
     {
         if ($this->pdo === null) {
 
-            $dbName = $_ENV['DATABASE'] ?? 'users';
+            $this->dbName = $_ENV['DATABASE'] ?? 'users';
 
             $dbHost = "localhost:3337";
             $dbUser = "root";
             $dbPass = "nexus123";
 
-            $this->pdo = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUser, $dbPass);
-            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->pdo = new PDO("mysql:host=$dbHost;dbname=$this->dbName", $dbUser, $dbPass);
         }
+    }
+
+    public function getDatabaseName(): string
+    {
+        return $this->dbName;
     }
 
     public function executeSelectQuery(string $query, array $params): array

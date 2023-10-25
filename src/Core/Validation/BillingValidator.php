@@ -80,7 +80,7 @@ class BillingValidator
         }
     }
 
-    private function trim(string $value): string
+    public function trim(string $value): string
     {
         return trim($value);
     }

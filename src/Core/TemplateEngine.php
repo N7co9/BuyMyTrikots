@@ -10,6 +10,7 @@ class TemplateEngine implements TemplateInterface
     private string $tpl;
 
     public string $templatePath;
+    public array $parameters;
     public function __construct($templatePath)
     {
         $this->templatePath = $templatePath;
@@ -40,9 +41,5 @@ class TemplateEngine implements TemplateInterface
     public function getTpl(): string
     {
         return $this->tpl;
-    }
-    public function getTplPath() : string
-    {
-        return $this->templatePath;
     }
 }

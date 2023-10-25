@@ -28,16 +28,82 @@ class ClientValidatorTest extends TestCase
 
         self::assertEmpty($errorArray);
     }
-    public function testValidateExceptionPassword() : void
+    public function testValidateExceptionPasswordEmpty() : void
     {
         $userDTO = new ClientDTO();
 
         $userDTO->email = 'TEST@TEST.com';
         $userDTO->username = 'TEST';
-        $userDTO->password = 'INVALID*';
+        $userDTO->password = '';
 
         $errorArray = $this->clientValidator->validate($userDTO);
 
+
+        self::assertInstanceOf(ErrorDTO::class, $errorArray[0]);
+        self::assertSame('Oops, your password doesn\'t look right!', $errorArray[0]->message);
+    }
+    public function testValidateExceptionPasswordNoUpperCase() : void
+    {
+        $userDTO = new ClientDTO();
+
+        $userDTO->email = 'TEST@TEST.com';
+        $userDTO->username = 'TEST';
+        $userDTO->password = 'xyz12345**';
+
+        $errorArray = $this->clientValidator->validate($userDTO);
+
+
+        self::assertInstanceOf(ErrorDTO::class, $errorArray[0]);
+        self::assertSame('Oops, your password doesn\'t look right!', $errorArray[0]->message);
+    }
+    public function testValidateExceptionPasswordNoLowerCase() : void
+    {
+        $userDTO = new ClientDTO();
+
+        $userDTO->email = 'TEST@TEST.com';
+        $userDTO->username = 'TEST';
+        $userDTO->password = 'XYZ12345*';
+
+        $errorArray = $this->clientValidator->validate($userDTO);
+
+        self::assertInstanceOf(ErrorDTO::class, $errorArray[0]);
+        self::assertSame('Oops, your password doesn\'t look right!', $errorArray[0]->message);
+    }
+    public function testValidateExceptionPasswordNoDigit() : void
+    {
+        $userDTO = new ClientDTO();
+
+        $userDTO->email = 'TEST@TEST.com';
+        $userDTO->username = 'TEST';
+        $userDTO->password = 'XyzOneTwoThreeFourFive*';
+
+        $errorArray = $this->clientValidator->validate($userDTO);
+
+        self::assertInstanceOf(ErrorDTO::class, $errorArray[0]);
+        self::assertSame('Oops, your password doesn\'t look right!', $errorArray[0]->message);
+    }
+    public function testValidateExceptionPasswordNoSpecialCharacter() : void
+    {
+        $userDTO = new ClientDTO();
+
+        $userDTO->email = 'TEST@TEST.com';
+        $userDTO->username = 'TEST';
+        $userDTO->password = 'XyzOneTwoThreeFourFive';
+
+        $errorArray = $this->clientValidator->validate($userDTO);
+
+        self::assertInstanceOf(ErrorDTO::class, $errorArray[0]);
+        self::assertSame('Oops, your password doesn\'t look right!', $errorArray[0]->message);
+    }
+    public function testValidateExceptionPasswordTooShort() : void
+    {
+        $userDTO = new ClientDTO();
+
+        $userDTO->email = 'TEST@TEST.com';
+        $userDTO->username = 'TEST';
+        $userDTO->password = 'Xy23* ';
+
+        $errorArray = $this->clientValidator->validate($userDTO);
 
         self::assertInstanceOf(ErrorDTO::class, $errorArray[0]);
         self::assertSame('Oops, your password doesn\'t look right!', $errorArray[0]->message);
