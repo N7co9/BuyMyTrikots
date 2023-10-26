@@ -9,16 +9,20 @@ use App\Core\DependencyProvider;
 use App\Core\DTO\ClientDTO;
 use App\Core\SQL\SqlConnector;
 use App\Model\ClientEntityManager;
+use App\Model\ClientRepository;
 use PHPUnit\Framework\TestCase;
 
 class ClientRegistrationControllerTest extends TestCase
 {
     public SqlConnector $sqlConnector;
     public ClientEntityManager $entityManager;
+    public ClientRepository $clientRepository;
 
     protected function setUp(): void
     {
         $this->sqlConnector = new SqlConnector();
+
+        $this->clientRepository = new ClientRepository();
 
         $containerBuilder = new Container();
         $dependencyProvider = new DependencyProvider();
@@ -40,10 +44,15 @@ class ClientRegistrationControllerTest extends TestCase
 
         $output = $this->construct->dataConstruct();
 
+        $verifyNewClient = $this->clientRepository->findByMail('T1EST@TEST.com');
+
+
         // since the Input is Valid, the Registration Controller will reset the vName & vMail
         // values to '' -> if not Valid the Name and Mail values would persist.
 
+        self::assertSame('TESTING', $verifyNewClient->username);
         self::assertSame('registration.twig', $output->getTpl());
+        self::assertInstanceOf(ClientDTO::class, $output->getParameters()['user']);
         self::assertSame('', $output->getParameters()['vName']);
         self::assertSame('', $output->getParameters()['vMail']);
         self::assertSame('Success. Welcome abroad!', $output->getParameters()['errors'][0]->message);

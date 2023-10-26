@@ -43,9 +43,9 @@ class ClientRegistrationController implements ControllerInterface
                 $validPassword = password_hash(password: $clientDTO->password, algo: PASSWORD_DEFAULT);
 
                 $newUser = new ClientDTO();
-                $newUser->username = ($clientDTO->username ?? '');
-                $newUser->email = ($clientDTO->email ?? '');
-                $newUser->password = ($validPassword);
+                $newUser->username = $clientDTO->username;
+                $newUser->email = $clientDTO->email;
+                $newUser->password = $validPassword;
 
                 if (empty($this->clientRepository->findByMail($clientDTO->email) && !empty($clientDTO->password))) {
                     $this->clientEntityManager->saveCredentials($newUser);

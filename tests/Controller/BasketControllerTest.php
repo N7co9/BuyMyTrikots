@@ -60,6 +60,7 @@ class BasketControllerTest extends TestCase
 
         $this->construct->dataConstruct();
 
+        self::assertSame('TEST@TEST.com', $this->construct->sessionHandler->getSessionMail());
         self::assertSame('basket.twig', $this->construct->dataConstruct()->getTpl());
         self::assertInstanceOf(BasketDTO::class, $this->construct->dataConstruct()->getParameters()['contents'][0]);
         self::assertSame('Cristiano Ronaldo Trikot', $this->construct->dataConstruct()->getParameters()['contents'][0]->name);
@@ -76,6 +77,24 @@ class BasketControllerTest extends TestCase
         $this->clientEntityManager->addToBasket('44', $this->clientRepository->getUserID($_SESSION['mail']));
         $this->construct->dataConstruct();
 
+        self::assertSame('TEST@TEST.com', $this->construct->sessionHandler->getSessionMail());
+        self::assertSame('basket.twig', $this->construct->dataConstruct()->getTpl());
+        self::assertIsArray($this->construct->dataConstruct()->getParameters()['contents']);
+        self::assertEmpty($this->construct->dataConstruct()->getParameters()['contents']);
+        self::assertEmpty($this->construct->dataConstruct()->getParameters()['total']);
+    }
+
+    public function testDataConstructNegative(): void
+    {
+        $_GET['action'] = 'remove';
+        $_SESSION['mail'] = '';
+        $_GET['id'] = '44';
+
+        $this->clientEntityManager->addToBasket('44', $this->clientRepository->getUserID($_SESSION['mail']));
+        $this->construct->dataConstruct();
+
+        self::assertSame('',$this->construct->feedback);
+        self::assertSame('', $this->construct->sessionHandler->getSessionMail());
         self::assertSame('basket.twig', $this->construct->dataConstruct()->getTpl());
         self::assertIsArray($this->construct->dataConstruct()->getParameters()['contents']);
         self::assertEmpty($this->construct->dataConstruct()->getParameters()['contents']);

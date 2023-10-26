@@ -13,8 +13,9 @@ class CheckoutController implements ControllerInterface
     private TemplateEngine $templateEngine;
     private BasketRepository $basketRepository;
     private OrderRepository $orderRepository;
-    private BillingValidator $billingValidator;
+    public BillingValidator $billingValidator;
 
+    public array $errorDTOList;
 
     public function __construct(Container $container)
     {
@@ -26,15 +27,15 @@ class CheckoutController implements ControllerInterface
 
     public function dataConstruct(): TemplateEngine
     {
-        $errorDTOList = $this->billingValidator->validate($this->orderRepository->getOrderInformation());
-        $this->billingValidator->redirectIfValid($errorDTOList);
+        $this->errorDTOList = $this->billingValidator->validate($this->orderRepository->getOrderInformation());
+        $this->billingValidator->redirectIfValid($this->errorDTOList);
 
         $basket = $this->basketRepository->getBasketInfo();
         $total = $this->basketRepository->getBasketTotal();
         $values = $this->orderRepository->getOrderInformation();
 
         $this->templateEngine->setTemplate('checkout.twig');
-        $this->templateEngine->addParameter('errors', $errorDTOList);
+        $this->templateEngine->addParameter('errors', $this->errorDTOList);
         $this->templateEngine->addParameter('values', $values);
         $this->templateEngine->addParameter('basket', $basket);
         $this->templateEngine->addParameter('total', $total);

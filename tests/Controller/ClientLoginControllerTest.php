@@ -48,6 +48,7 @@ class ClientLoginControllerTest extends TestCase
 
         $this->clientLoginController->dataConstruct();
 
+        self::assertSame('TEST@TEST.com', $_SESSION['mail']);
         self::assertSame('?page=shop', $this->clientLoginController->redirect->location);
         self::assertSame(['feedback' => 'success'], $this->clientLoginController->dataConstruct()->getParameters());
         assertSame('login.twig', $this->clientLoginController->dataConstruct()->getTpl());

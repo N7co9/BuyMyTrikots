@@ -12,7 +12,7 @@ class HomepageController implements ControllerInterface
 {
     private TemplateEngine $templateEngine;
     private PlayerRepository $playerRepository;
-    private SearchEngine $searchEngine;
+    public SearchEngine $searchEngine;
     private SessionHandler $sessionHandler;
     public function __construct(Container $container)
     {

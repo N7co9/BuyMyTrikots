@@ -53,9 +53,10 @@ class ThankYouControllerTest extends TestCase
 
         $this->orderEntityManager->saveOrder($orderDTO);
 
-        $this->clientEntityManager->addToBasket('44', $this->clientRepository->getUserID($_SESSION['mail']));
-
         $this->clientEntityManager->saveCredentials($ClientDTO);
+
+
+        $this->clientEntityManager->addToBasket('44', $this->clientRepository->getUserID('TEST@TEST.com'));
 
         $containerBuilder = new Container();
         $dependencyProvider = new DependencyProvider();
@@ -71,8 +72,10 @@ class ThankYouControllerTest extends TestCase
 
         self::assertIsInt($this->construct->dataConstruct()->getParameters()['orderID']);
         self::assertIsArray($this->construct->dataConstruct()->getParameters()['basket']);
+        self::assertEmpty($this->construct->dataConstruct()->getParameters()['basket']);
         self::assertInstanceOf(OrderDTO::class, $this->construct->dataConstruct()->getParameters()['order']);
         self::assertSame('thankyou.twig', $this->construct->dataConstruct()->getTpl());
+
     }
 
     public function tearDown(): void

@@ -15,9 +15,11 @@ class BasketController implements ControllerInterface
 
     private BasketRepository $basketRepository;
     private BasketManipulator $manipulator;
-    private SessionHandler $sessionHandler;
+    public SessionHandler $sessionHandler;
+    public string $feedback;
     public function __construct(Container $container)
     {
+        $this->feedback = '';
         $this->sessionHandler = $container->get(SessionHandler::class);
         $this->templateEngine = $container->get(TemplateEngine::class);
         $this->basketRepository = $container->get(BasketRepository::class);
@@ -34,6 +36,7 @@ class BasketController implements ControllerInterface
         ];
 
         if (!empty($this->sessionHandler->getSessionMail()) && array_key_exists($action, $actionMap)) {
+            $this->feedback = 'successful action';
             $this->manipulator->{$actionMap[$action]}();
         }
 
