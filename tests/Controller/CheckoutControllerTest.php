@@ -21,6 +21,8 @@ class CheckoutControllerTest extends TestCase
 
     protected function setUp(): void
     {
+        $_SESSION = [];
+        $_POST = [];
         $this->sqlConnector = new SqlConnector();
         $this->redirectSpy = new RedirectSpy();
 
@@ -49,6 +51,7 @@ class CheckoutControllerTest extends TestCase
 
     public function testDataConstruct(): void
     {
+        $_SESSION['mail'] = 'TEST@TEST.com';
         $_POST['delivery'] = 'set';
         $this->checkoutController->errorDTOList = [];
         $this->checkoutController->dataConstruct();
@@ -56,7 +59,6 @@ class CheckoutControllerTest extends TestCase
         $location = $this->checkoutController->billingValidator->redirect->location;
 
         self::assertSame('?page=order-overview', $location);
-        $_SESSION['mail'] = 'TEST@TEST.com';
         self::assertSame('checkout.twig', $this->checkoutController->dataConstruct()->getTpl() );
         self::assertIsArray($this->checkoutController->dataConstruct()->getParameters()['errors']);
         self::assertSame('TEST@TEST.com', $this->checkoutController->dataConstruct()->getParameters()['values']->email);

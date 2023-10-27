@@ -50,7 +50,9 @@ class ApiCache {
     }
 
     private function saveToCache(array $data, string $cacheFilePath): void {
-        file_put_contents($cacheFilePath, json_encode($data));
+        if(file_exists($cacheFilePath)){
+            file_put_contents($cacheFilePath, json_encode($data));
+        }
     }
 
     private function getCacheFilePath(string $type, $id): string {

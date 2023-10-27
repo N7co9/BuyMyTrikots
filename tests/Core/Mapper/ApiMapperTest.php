@@ -2,7 +2,6 @@
 
 namespace Core\Mapper;
 
-use _test\API\ApiCacheTest;
 use App\Core\Mapper\ApiMapper;
 use PHPUnit\Framework\TestCase;
 
