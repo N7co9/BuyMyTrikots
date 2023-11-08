@@ -2,7 +2,7 @@
 
 namespace Core;
 
-use App\Core\TemplateEngine;
+use App\Global\Presentation\TemplateEngine\TemplateEngine;
 use PHPUnit\Framework\TestCase;
 
 class TemplateEngineTest extends TestCase

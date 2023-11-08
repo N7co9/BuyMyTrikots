@@ -2,23 +2,21 @@
 
 namespace Controller;
 
-use App\Controller\HomepageController;
-use App\Controller\OrderOverviewController;
-use App\Controller\ThankYouController;
-use App\Core\Container;
-use App\Core\DependencyProvider;
-use App\Core\DTO\ClientDTO;
-use App\Core\DTO\OrderDTO;
-use App\Core\DTO\PlayerDTO;
-use App\Core\Redirect\Redirect;
-use App\Core\Redirect\RedirectSpy;
-use App\Core\SearchEngine;
-use App\Core\SQL\SqlConnector;
-use App\Model\BasketRepository;
-use App\Model\ClientEntityManager;
-use App\Model\ClientRepository;
-use App\Model\OrderEntityManager;
-use App\Model\OrderRepository;
+use App\Global\Business\Dependency\Container;
+use App\Global\Business\Dependency\DependencyProvider;
+use App\Global\Business\DTO\ClientDTO;
+use App\Global\Business\DTO\OrderDTO;
+use App\Global\Business\DTO\PlayerDTO;
+use App\Global\Business\Redirect\RedirectSpy;
+use App\Global\Business\Redirect\SearchEngine;
+use App\Global\Persistence\Repository\ClientRepository;
+use App\Global\Persistence\Repository\OrderRepository;
+use App\Global\Persistence\SQL\SqlConnector;
+use App\User\Components\Basket\Persistence\Repository\BasketRepository;
+use App\User\Components\Homepage\Communication\Controller\HomepageController;
+use App\User\Components\Order\Persistence\Entity\OrderEntityManager;
+use App\User\Components\Registration\Persistence\Entity\ClientEntityManager;
+use App\User\Components\ThankYou\Communication\Controller\ThankYouController;
 use PHPUnit\Framework\TestCase;
 
 class HomepageControllerTest extends TestCase

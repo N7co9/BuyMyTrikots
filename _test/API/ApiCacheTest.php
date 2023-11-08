@@ -2,19 +2,18 @@
 
 namespace _test\API;
 
-use App\Core\API\ApiCache;
-use App\Core\API\ApiHandling;
+use App\Global\Persistence\API\ApiCache;
+use App\Global\Persistence\API\ApiHandling;
 use PHPUnit\Framework\TestCase;
 
 class ApiCacheTest extends TestCase
 {
-    private ApiHandling $apiHandling;
     private ApiCache $apiCache;
 
     protected function setUp(): void
     {
-        $this->apiHandling = new ApiHandling();
-        $this->apiCache = new ApiCache($this->apiHandling);
+        $apiHandling = new ApiHandling();
+        $this->apiCache = new ApiCache($apiHandling);
         $this->apiCache->cacheFileDir = __DIR__ . '/../../../tests/Core/API/ApiCacheTestData';
     }
 

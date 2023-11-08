@@ -2,14 +2,13 @@
 
 namespace Controller;
 
-use App\Controller\ClientRegistrationController;
-use App\Core\Container;
-use App\Core\DependencyProvider;
-
-use App\Core\DTO\ClientDTO;
-use App\Core\SQL\SqlConnector;
-use App\Model\ClientEntityManager;
-use App\Model\ClientRepository;
+use App\Global\Business\Dependency\Container;
+use App\Global\Business\Dependency\DependencyProvider;
+use App\Global\Business\DTO\ClientDTO;
+use App\Global\Persistence\Repository\ClientRepository;
+use App\Global\Persistence\SQL\SqlConnector;
+use App\User\Components\Registration\Communication\Controller\ClientRegistrationController;
+use App\User\Components\Registration\Persistence\Entity\ClientEntityManager;
 use PHPUnit\Framework\TestCase;
 
 class ClientRegistrationControllerTest extends TestCase

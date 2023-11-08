@@ -2,11 +2,10 @@
 
 namespace Core\Validation;
 
-use App\Core\DTO\ErrorDTO;
-use App\Core\DTO\OrderDTO;
-use App\Core\Redirect\Redirect;
-use App\Core\Redirect\RedirectSpy;
-use App\Core\Validation\BillingValidator;
+use App\Global\Business\DTO\ErrorDTO;
+use App\Global\Business\DTO\OrderDTO;
+use App\Global\Business\Redirect\RedirectSpy;
+use App\User\Components\Checkout\Business\Validation\BillingValidator;
 use PHPUnit\Framework\TestCase;
 
 class BillingValidatorTest extends TestCase

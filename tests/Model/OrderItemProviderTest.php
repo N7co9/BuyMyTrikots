@@ -2,14 +2,14 @@
 
 namespace Model;
 
-use App\Core\DTO\ClientDTO;
-use App\Core\SQL\SqlConnector;
-use App\Model\ClientEntityManager;
-use App\Model\ClientRepository;
-use App\Model\OrderEntityManager;
-use App\Model\OrderItemProvider;
-use App\Model\OrderRepository;
-use App\Model\PlayerRepository;
+use App\Global\Business\DTO\ClientDTO;
+use App\Global\Business\Provider\OrderItemProvider;
+use App\Global\Persistence\Repository\ClientRepository;
+use App\Global\Persistence\Repository\OrderRepository;
+use App\Global\Persistence\Repository\PlayerRepository;
+use App\Global\Persistence\SQL\SqlConnector;
+use App\User\Components\Order\Persistence\Entity\OrderEntityManager;
+use App\User\Components\Registration\Persistence\Entity\ClientEntityManager;
 use PHPUnit\Framework\TestCase;
 
 class OrderItemProviderTest extends TestCase

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuyMyTrikots - Trikot Webshop</title>
+    {% for player in players %}
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ player.clubEmblem }}">
+    {% endfor %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eaf3f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #B3DFF0;
+            padding: 15px 5%;
+            border-radius: 25px 25px 0 0;
+        }
+
+        header h1 {
+            font-size: 24px;
+            margin: 0;
+            flex: 1;
+        }
+
+        header img.logo {
+            height: 40px;
+            margin-right: 15px;
+            border-radius: 50%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+        }
+
+        .product {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #EAEAEA;
+        }
+
+        .product img {
+            max-width: 120px;
+            height: auto;
+            border-radius: 15px;
+        }
+
+        .product-info {
+            flex: 1;
+            padding-left: 20px;
+        }
+
+        .product-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 0;
+        }
+
+        .product-price {
+            font-size: 18px;
+            color: #7A9BBE;
+            margin-bottom: 0;
+        }
+
+        .product-details {
+            font-size: 14px;
+            color: #777;
+        }
+
+        .button-link {
+            padding: 10px 20px;
+            background-color: #7A9BBE;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 50px;
+        }
+
+        .button-link:hover {
+            background-color: #5A7CA0;
+        }
+
+        .search-container {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .search-bar {
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #EAEAEA;
+            border-radius: 50px;
+            margin-right: 10px;
+        }
+
+        .search-button {
+            background-color: #7A9BBE;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 50px;
+        }
+
+        .search-button:hover {
+            background-color: #5A7CA0;
+        }
+
+        .club-info {
+            background-color: #D3E7F3;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .club-info h2 {
+            font-size: 24px;
+        }
+
+        .club-info p,
+        .club-info a {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .club-info a:hover {
+            text-decoration: underline;
+        }
+
+        .basket {
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+        }
+
+        .basket img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+
+        .header-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-buttons a {
+            margin-right: 20px; /* Spacing between buttons */
+        }
+
+        .header-buttons a:last-child {
+            margin-right: 0; /* No spacing for the last button to keep things neat */
+        }
+
+        .logout-button {
+            background-color: #F08080; /* pastel red color */
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 20px; /* rounded design */
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-button:hover {
+            background-color: #D06767;
+        }
+
+        .basket {
+            display: flex;
+            align-items: center;
+            background-color: #adb5e6; /* pastel blue color */
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 20px; /* rounded design */
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .basket:hover {
+            background-color: #8CB4D6;
+        }
+
+        .basket img {
+            margin-right: 8px; /* spacing between icon and text */
+        }
+        .login-button, .register-button {
+            background-color: #F2D7D5; /* pastel peach color */
+            color: #333; /* darker text color for contrast */
+            padding: 8px 16px;
+            border-radius: 20px; /* rounded design */
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-button:hover, .register-button:hover {
+            background-color: #E6B0AA; /* slightly darker peach for hover */
+        }
+
+        .content-wrapper {
+            display: flex;
+            align-items: start; /* This ensures all content starts at the top of their containers */
+            justify-content: space-between; /* Spreads out the elements */
+            gap: 20px; /* Provides some space between elements */
+        }
+
+        .gif-container {
+            flex: 1; /* Takes up available space equally */
+            max-width: calc(100% / 3); /* Ensures the GIFs don't take up more than a third of the content width */
+            overflow: hidden; /* Prevents overflow of large images */
+        }
+
+        .gif-container img {
+            width: 100%; /* Ensures GIFs take the full width of their container */
+            height: auto; /* Maintains aspect ratio */
+        }
+
+        .main-content {
+            flex: 2; /* Allows the main content to take up double the space compared to the GIFs */
+            max-width: calc(100% / 3 * 2); /* Allows main content to take up to two-thirds of the width */
+            overflow: hidden; /* Ensures content doesn't overflow its container */
+        }
+
+        @media screen and (max-width: 768px) {
+            .product {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .product img {
+                margin-bottom: 15px;
+            }
+
+            .header-buttons {
+                text-align: center;
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    <img src="/src/Global/Presentation/Logo/logo_real.png" alt="BuyMyTrikots Logo" style="width: 108px; height: 99px;">
+    <span> <h1>B u y - M y - T r i k o t s  </h1> </span>
+
+
+    <div class="header-buttons">
+        {% if user is empty %}
+            <a href="/?page=login" class="login-button">Login</a>
+            <a href="/?page=registration" class="register-button">Register</a>
+        {% else %}
+            <a href="/?page=logout" class="logout-button">Logout</a>
+            <a href="/?page=basket" class="basket">
+                <img src="https://icons.veryicon.com/png/o/system/dan_system/shopping-basket-11.png"
+                     alt="Shopping Basket"
+                     style="width: 16px; height: 16px;">
+                Basket
+            </a>
+        {% endif %}
+    </div>
+
+</header>
+<div class="container">
+    {% if players is not empty %}
+        <div class="club-info">
+            <h2>{{ players[0].clubName }}</h2>
+            <p>Founded in: {{ players[0].clubFounded }}</p>
+            <p>Address: {{ players[0].clubAddress }}</p>
+            <a href="{{ players[0].clubWebsite }}">Website</a>
+        </div>
+    {% endif %}
+    <div class="search-container">
+        <form action="" method="POST">
+            <input type="text" class="search-bar" name="search" placeholder="Search for team..." id="search">
+            <button type="submit" class="search-button">Search</button>
+        </form>
+    </div>
+
+    {% for player in players %}
+        <div class="product">
+            <img src="{{ player.clubEmblem }}" alt="{{ player.name }} Trikot">
+            <div class="product-info">
+                <h2 class="product-title">{{ player.name }} Trikot</h2>
+                <span>{{ player.nationality }}</span><br>
+                <span>{{ player.dateOfBirth }}</span><br>
+                <p class="product-price">$29.99</p>
+            </div>
+            {% if user is not empty %}
+                <a href="/?page=basket&action=add&id={{ player.id }}" class="button-link">Add to Cart</a>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+</body>
+
+</html>

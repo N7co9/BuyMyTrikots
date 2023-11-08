@@ -2,14 +2,14 @@
 
 namespace Controller;
 
-use App\Controller\ClientLoginController;
-use App\Core\Container;
-use App\Core\DependencyProvider;
-use App\Core\DTO\ClientDTO;
-use App\Core\Redirect\Redirect;
-use App\Core\Redirect\RedirectSpy;
-use App\Core\SQL\SqlConnector;
-use App\Model\ClientEntityManager;
+use App\Global\Business\Dependency\Container;
+use App\Global\Business\Dependency\DependencyProvider;
+use App\Global\Business\DTO\ClientDTO;
+use App\Global\Business\Redirect\Redirect;
+use App\Global\Business\Redirect\RedirectSpy;
+use App\Global\Persistence\SQL\SqlConnector;
+use App\User\Components\Login\Communication\Controller\ClientLoginController;
+use App\User\Components\Registration\Persistence\Entity\ClientEntityManager;
 use PHPUnit\Framework\TestCase;
 use function PHPUnit\Framework\assertSame;
 

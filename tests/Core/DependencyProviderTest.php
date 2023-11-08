@@ -2,24 +2,24 @@
 
 namespace Tests\Core;
 
-use App\Core\Container;
-use App\Core\DependencyProvider;
-use App\Core\TemplateEngine;
-use App\Core\SearchEngine;
-use App\Core\Basket\BasketManipulator;
-use App\Core\Session\SessionHandler;
-use App\Core\Validation\ClientValidator;
-use App\Core\Validation\BillingValidator;
-use App\Core\Redirect\Redirect;
-use App\Core\Redirect\RedirectSpy;
-use App\Core\DTO\ClientDTO;
-use App\Core\Mapper\ClientMapper;
-use App\Model\BasketRepository;
-use App\Model\ClientEntityManager;
-use App\Model\ClientRepository;
-use App\Model\OrderEntityManager;
-use App\Model\OrderRepository;
-use App\Model\PlayerRepository;
+use App\Global\Business\Dependency\Container;
+use App\Global\Business\Dependency\DependencyProvider;
+use App\Global\Business\DTO\ClientDTO;
+use App\Global\Business\Mapper\ClientMapper;
+use App\Global\Business\Redirect\Redirect;
+use App\Global\Business\Redirect\RedirectSpy;
+use App\Global\Business\Redirect\SearchEngine;
+use App\Global\Persistence\Repository\ClientRepository;
+use App\Global\Persistence\Repository\OrderRepository;
+use App\Global\Persistence\Repository\PlayerRepository;
+use App\Global\Presentation\Session\SessionHandler;
+use App\Global\Presentation\TemplateEngine\TemplateEngine;
+use App\User\Components\Basket\Business\Manipulation\BasketManipulator;
+use App\User\Components\Basket\Persistence\Repository\BasketRepository;
+use App\User\Components\Checkout\Business\Validation\BillingValidator;
+use App\User\Components\Order\Persistence\Entity\OrderEntityManager;
+use App\User\Components\Registration\Business\Validation\ClientValidator;
+use App\User\Components\Registration\Persistence\Entity\ClientEntityManager;
 use PHPUnit\Framework\TestCase;
 
 class DependencyProviderTest extends TestCase

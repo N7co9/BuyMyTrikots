@@ -2,7 +2,7 @@
 
 namespace Core\Session;
 
-use App\Core\Session\SessionHandler;
+use App\Global\Presentation\Session\SessionHandler;
 use PHPUnit\Framework\TestCase;
 
 class SessionHandlerTest extends TestCase

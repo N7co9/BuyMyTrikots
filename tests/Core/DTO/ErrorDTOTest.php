@@ -2,7 +2,7 @@
 
 namespace Core\DTO;
 
-use App\Core\DTO\ErrorDTO;
+use App\Global\Business\DTO\ErrorDTO;
 use PHPUnit\Framework\TestCase;
 
 class ErrorDTOTest extends TestCase

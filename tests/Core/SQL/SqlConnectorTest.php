@@ -2,7 +2,7 @@
 
 namespace Core\SQL;
 
-use App\Core\SQL\SqlConnector;
+use App\Global\Persistence\SQL\SqlConnector;
 use PHPUnit\Framework\TestCase;
 
 class SqlConnectorTest extends TestCase

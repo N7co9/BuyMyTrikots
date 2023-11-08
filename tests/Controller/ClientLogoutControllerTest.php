@@ -2,16 +2,14 @@
 
 namespace Controller;
 
-use App\Controller\ClientLoginController;
-use App\Controller\ClientLogoutController;
-use App\Core\DependencyProvider;
-use App\Core\Redirect\Redirect;
-use App\Core\Redirect\RedirectSpy;
 use App\Core\Redirect\ReSpy;
-use App\Core\Session\SessionHandler;
-use App\Core\SQL\SqlConnector;
+use App\Global\Business\Dependency\Container;
+use App\Global\Business\Redirect\Redirect;
+use App\Global\Business\Redirect\RedirectSpy;
+use App\Global\Persistence\SQL\SqlConnector;
+use App\Global\Presentation\Session\SessionHandler;
+use App\User\Components\Logout\Communication\Controller\ClientLogoutController;
 use PHPUnit\Framework\TestCase;
-use App\Core\Container;
 
 class ClientLogoutControllerTest extends TestCase
 {

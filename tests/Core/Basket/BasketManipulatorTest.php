@@ -2,13 +2,13 @@
 
 namespace Core\Basket;
 
-use App\Core\Basket\BasketManipulator;
-use App\Core\DTO\BasketDTO;
-use App\Core\DTO\ClientDTO;
-use App\Core\SQL\SqlConnector;
-use App\Model\BasketRepository;
-use App\Model\ClientEntityManager;
-use App\Model\ClientRepository;
+use App\Global\Business\DTO\ClientDTO;
+use App\Global\Persistence\Repository\ClientRepository;
+use App\Global\Persistence\SQL\SqlConnector;
+use App\User\Components\Basket\Business\DTO\BasketDTO;
+use App\User\Components\Basket\Business\Manipulation\BasketManipulator;
+use App\User\Components\Basket\Persistence\Repository\BasketRepository;
+use App\User\Components\Registration\Persistence\Entity\ClientEntityManager;
 use PHPUnit\Framework\TestCase;
 
 class BasketManipulatorTest extends TestCase

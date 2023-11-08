@@ -2,9 +2,9 @@
 
 namespace Core\Validation;
 
-use App\Core\DTO\ClientDTO;
-use App\Core\DTO\ErrorDTO;
-use App\Core\Validation\ClientValidator;
+use App\Global\Business\DTO\ClientDTO;
+use App\Global\Business\DTO\ErrorDTO;
+use App\User\Components\Registration\Business\Validation\ClientValidator;
 use PHPUnit\Framework\TestCase;
 
 class ClientValidatorTest extends TestCase

@@ -9,10 +9,10 @@ ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
 
-$container = new \App\Core\Container();
-$dependencyProvider = new \App\Core\DependencyProvider();
+$container = new \App\Global\Business\Dependency\Container();
+$dependencyProvider = new \App\Global\Business\Dependency\DependencyProvider();
 $dependencyProvider->provide($container);
-$provider = new \App\Core\ControllerProvider();
+$provider = new \App\Global\Business\Provider\ControllerProvider();
 
 $page = $_GET['page'] ?? '';
 
@@ -20,7 +20,7 @@ $page = $_GET['page'] ?? '';
 foreach ($provider->getList() as $key => $controllerClass) {
     if ($key === $page) {
         $controllerCheck = new $controllerClass($container);
-        if ($controllerCheck instanceof \App\Controller\ControllerInterface) {
+        if ($controllerCheck instanceof \App\Global\Interface\Controller\ControllerInterface) {
             $controller = $controllerCheck;
             break;
         }

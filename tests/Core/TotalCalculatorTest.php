@@ -2,14 +2,14 @@
 
 namespace Core;
 
-use App\Core\DTO\ClientDTO;
-use App\Core\SQL\SqlConnector;
-use App\Core\TotalCalculator;
-use App\Model\BasketRepository;
-use App\Model\ClientEntityManager;
-use App\Model\ClientRepository;
-use App\Model\OrderEntityManager;
-use App\Model\OrderRepository;
+use App\Global\Business\DTO\ClientDTO;
+use App\Global\Persistence\Repository\ClientRepository;
+use App\Global\Persistence\Repository\OrderRepository;
+use App\Global\Persistence\SQL\SqlConnector;
+use App\User\Components\Basket\Business\Manipulation\TotalManipulator;
+use App\User\Components\Basket\Persistence\Repository\BasketRepository;
+use App\User\Components\Order\Persistence\Entity\OrderEntityManager;
+use App\User\Components\Registration\Persistence\Entity\ClientEntityManager;
 use PHPUnit\Framework\TestCase;
 
 class TotalCalculatorTest extends TestCase
@@ -20,7 +20,7 @@ class TotalCalculatorTest extends TestCase
     public ClientEntityManager $clientEntityManager;
     public OrderEntityManager $orderEntityManager;
     public OrderRepository $orderRepository;
-    public TotalCalculator $totalCalculator;
+    public TotalManipulator $totalCalculator;
 
     public function setUp(): void
     {
@@ -30,7 +30,7 @@ class TotalCalculatorTest extends TestCase
         $this->clientEntityManager = new ClientEntityManager();
         $this->orderEntityManager = new OrderEntityManager();
         $this->orderRepository = new OrderRepository();
-        $this->totalCalculator = new TotalCalculator();
+        $this->totalCalculator = new TotalManipulator();
 
         $ClientDTO = new ClientDTO();
         $ClientDTO->username = 'TEST';

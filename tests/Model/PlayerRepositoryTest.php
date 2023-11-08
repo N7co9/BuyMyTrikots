@@ -2,14 +2,13 @@
 
 namespace Model;
 
-use App\Core\DTO\ClientDTO;
-use App\Core\DTO\PlayerDTO;
-use App\Core\SQL\SqlConnector;
-use App\Model\BasketRepository;
-use App\Model\ClientEntityManager;
-use App\Model\ClientRepository;
-use App\Model\OrderEntityManager;
-use App\Model\PlayerRepository;
+use App\Global\Business\DTO\ClientDTO;
+use App\Global\Business\DTO\PlayerDTO;
+use App\Global\Persistence\Repository\ClientRepository;
+use App\Global\Persistence\Repository\PlayerRepository;
+use App\Global\Persistence\SQL\SqlConnector;
+use App\User\Components\Basket\Persistence\Repository\BasketRepository;
+use App\User\Components\Registration\Persistence\Entity\ClientEntityManager;
 use PHPUnit\Framework\TestCase;
 
 class PlayerRepositoryTest extends TestCase

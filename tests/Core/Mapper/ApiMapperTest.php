@@ -2,7 +2,7 @@
 
 namespace Core\Mapper;
 
-use App\Core\Mapper\ApiMapper;
+use App\Global\Business\Mapper\ApiMapper;
 use PHPUnit\Framework\TestCase;
 
 class ApiMapperTest extends TestCase
