@@ -2,21 +2,21 @@
 
 namespace Controller;
 
+use App\Components\Checkout\Business\Validation\BillingValidator;
+use App\Components\Checkout\Communication\Controller\CheckoutController;
+use App\Components\User\Communication\Controller\UserLoginController;
+use App\Components\User\Persistence\Entity\UserEntityManager;
 use App\Global\Business\Dependency\Container;
 use App\Global\Business\Dependency\DependencyProvider;
 use App\Global\Business\DTO\ClientDTO;
 use App\Global\Business\Redirect\RedirectSpy;
 use App\Global\Persistence\SQL\SqlConnector;
-use App\User\Components\Checkout\Business\Validation\BillingValidator;
-use App\User\Components\Checkout\Communication\Controller\CheckoutController;
-use App\User\Components\Login\Communication\Controller\ClientLoginController;
-use App\User\Components\Registration\Persistence\Entity\ClientEntityManager;
 use PHPUnit\Framework\TestCase;
 
 class CheckoutControllerTest extends TestCase
 {
-    public ClientLoginController $clientLoginController;
-    public ClientEntityManager $clientEntityManager;
+    public UserLoginController $clientLoginController;
+    public UserEntityManager $clientEntityManager;
     public RedirectSpy $redirectSpy;
 
     protected function setUp(): void
@@ -30,7 +30,7 @@ class CheckoutControllerTest extends TestCase
         $dependencyProvider = new DependencyProvider();
         $dependencyProvider->provide($containerBuilder);
 
-        $this->clientEntityManager = new ClientEntityManager();
+        $this->clientEntityManager = new UserEntityManager();
 
         $container = new Container();
         $dependencyProvider = new DependencyProvider();

@@ -3,9 +3,9 @@
 namespace Core;
 
 
+use App\Components\Homepage\Communication\Controller\HomepageController;
+use App\Components\User\Communication\Controller\UserLoginController;
 use App\Global\Business\Provider\ControllerProvider;
-use App\User\Components\Homepage\Communication\Controller\HomepageController;
-use App\User\Components\Login\Communication\Controller\ClientLoginController;
 use PHPUnit\Framework\TestCase;
 
 class ControllerProviderTest extends TestCase
@@ -16,7 +16,7 @@ class ControllerProviderTest extends TestCase
         $container = $provider->getList();
 
         self::assertSame(HomepageController::class, $container['shop']);
-        self::assertSame(ClientLoginController::class, $container['login']);
+        self::assertSame(UserLoginController::class, $container['login']);
 
     }
 }

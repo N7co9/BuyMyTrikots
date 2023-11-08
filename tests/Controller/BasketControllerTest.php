@@ -2,36 +2,36 @@
 
 namespace Controller;
 
+use App\Components\Basket\Business\DTO\BasketDTO;
+use App\Components\Basket\Communication\Controller\BasketController;
+use App\Components\Basket\Persistence\Repository\BasketRepository;
+use App\Components\Order\Persistence\Entity\OrderEntityManager;
+use App\Components\Order\Persistence\Repository\OrderRepository;
+use App\Components\ThankYou\Communication\Controller\ThankYouController;
+use App\Components\User\Persistence\Entity\UserEntityManager;
+use App\Components\User\Persistence\Repository\UserRepository;
 use App\Global\Business\Dependency\Container;
 use App\Global\Business\Dependency\DependencyProvider;
 use App\Global\Business\DTO\ClientDTO;
-use App\Global\Persistence\Repository\ClientRepository;
-use App\Global\Persistence\Repository\OrderRepository;
 use App\Global\Persistence\SQL\SqlConnector;
-use App\User\Components\Basket\Business\DTO\BasketDTO;
-use App\User\Components\Basket\Communication\Controller\BasketController;
-use App\User\Components\Basket\Persistence\Repository\BasketRepository;
-use App\User\Components\Order\Persistence\Entity\OrderEntityManager;
-use App\User\Components\Registration\Persistence\Entity\ClientEntityManager;
-use App\User\Components\ThankYou\Communication\Controller\ThankYouController;
 use PHPUnit\Framework\TestCase;
 
 class BasketControllerTest extends TestCase
 {
     public ThankYouController $thankYouController;
     public SqlConnector $sqlConnector;
-    public ClientRepository $clientRepository;
+    public UserRepository $clientRepository;
     public BasketRepository $basketRepository;
-    public ClientEntityManager $clientEntityManager;
+    public UserEntityManager $clientEntityManager;
     public OrderEntityManager $orderEntityManager;
     public OrderRepository $orderRepository;
 
     public function setUp(): void
     {
-        $this->clientRepository = new ClientRepository();
+        $this->clientRepository = new UserRepository();
         $this->sqlConnector = new SqlConnector();
         $this->basketRepository = new BasketRepository();
-        $this->clientEntityManager = new ClientEntityManager();
+        $this->clientEntityManager = new UserEntityManager();
         $this->orderEntityManager = new OrderEntityManager();
         $this->orderRepository = new OrderRepository();
 

@@ -2,14 +2,12 @@
 
 namespace App\Global\Business\Provider;
 
-use App\User\Components\Basket\Persistence\Repository\BasketRepository;
+use App\Components\Basket\Persistence\Repository\BasketRepository;
 
-class OrderItemProvider
+readonly class OrderItemProvider
 {
-    private BasketRepository $basketRepository;
-    public function __construct()
+    public function __construct(private BasketRepository $basketRepository)
     {
-        $this->basketRepository = new BasketRepository();
     }
     public function getItems() : array
     {

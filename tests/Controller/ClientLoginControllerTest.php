@@ -2,14 +2,14 @@
 
 namespace Controller;
 
+use App\Components\User\Communication\Controller\UserLoginController;
+use App\Components\User\Persistence\Entity\UserEntityManager;
 use App\Global\Business\Dependency\Container;
 use App\Global\Business\Dependency\DependencyProvider;
 use App\Global\Business\DTO\ClientDTO;
 use App\Global\Business\Redirect\Redirect;
 use App\Global\Business\Redirect\RedirectSpy;
 use App\Global\Persistence\SQL\SqlConnector;
-use App\User\Components\Login\Communication\Controller\ClientLoginController;
-use App\User\Components\Registration\Persistence\Entity\ClientEntityManager;
 use PHPUnit\Framework\TestCase;
 use function PHPUnit\Framework\assertSame;
 
@@ -17,8 +17,8 @@ class ClientLoginControllerTest extends TestCase
 {
     public SqlConnector $sqlConnector;
     public RedirectSpy $redirectSpy;
-    public ClientLoginController $clientLoginController;
-    public ClientEntityManager $clientEntityManager;
+    public UserLoginController $clientLoginController;
+    public UserEntityManager $clientEntityManager;
     protected function setUp(): void
     {
         $this->sqlconnector = new SqlConnector();
@@ -29,14 +29,14 @@ class ClientLoginControllerTest extends TestCase
         $dependencyProvider->provide($container);
         $container->set(Redirect::class, $this->redirectSpy);
 
-        $this->clientEntityManager = new ClientEntityManager();
+        $this->clientEntityManager = new UserEntityManager();
 
         $clientDTO = new ClientDTO();
         $clientDTO->email = 'TEST@TEST.com';
         $clientDTO->password = '$2y$10$d9nKafUjEIkwJGRTM0pUcec9papz3UojboRwnzV10yomN0qM3mWha';
         $this->clientEntityManager->saveCredentials($clientDTO);
 
-        $this->clientLoginController = new ClientLoginController($container);
+        $this->clientLoginController = new UserLoginController($container);
         parent::setUp();
     }
     public function testDataConstructValid(): void

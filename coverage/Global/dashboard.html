@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /home/nicogruenewald/Documents/BuyMyTrikots/src/Global</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../_css/bootstrap.min.css?v=10.1.7" rel="stylesheet" type="text/css">
+  <link href="../_css/nv.d3.min.css?v=10.1.7" rel="stylesheet" type="text/css">
+  <link href="../_css/style.css?v=10.1.7" rel="stylesheet" type="text/css">
+  <link href="../_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="../index.html">/home/nicogruenewald/Documents/BuyMyTrikots/src</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Global</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Business/Dependency/DependencyProvider.php.html#30">App\Global\Business\Dependency\DependencyProvider</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Business/Mapper/BillingMapper.php.html#7">App\Global\Business\Mapper\BillingMapper</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Business/Mapper/ClientMapper.php.html#8">App\Global\Business\Mapper\ClientMapper</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Business/Provider/OrderItemProvider.php.html#7">App\Global\Business\Provider\OrderItemProvider</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Business/Redirect/Redirect.php.html#8">App\Global\Business\Redirect\Redirect</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Persistence/API/ApiCache.php.html#7">App\Global\Persistence\API\ApiCache</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Persistence/API/ApiHandling.php.html#6">App\Global\Persistence\API\ApiHandling</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Business/Dependency/Container.php.html#7">App\Global\Business\Dependency\Container</a></td><td class="text-right">40%</td></tr>
+       <tr><td><a href="Persistence/SQL/SqlConnector.php.html#7">App\Global\Persistence\SQL\SqlConnector</a></td><td class="text-right">48%</td></tr>
+       <tr><td><a href="Business/Mapper/ApiMapper.php.html#8">App\Global\Business\Mapper\ApiMapper</a></td><td class="text-right">70%</td></tr>
+       <tr><td><a href="Presentation/Session/SessionHandler.php.html#5">App\Global\Presentation\Session\SessionHandler</a></td><td class="text-right">76%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Persistence/API/ApiCache.php.html#7">App\Global\Persistence\API\ApiCache</a></td><td class="text-right">156</td></tr>
+       <tr><td><a href="Persistence/SQL/SqlConnector.php.html#7">App\Global\Persistence\SQL\SqlConnector</a></td><td class="text-right">27</td></tr>
+       <tr><td><a href="Business/Mapper/ClientMapper.php.html#8">App\Global\Business\Mapper\ClientMapper</a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Business/Provider/OrderItemProvider.php.html#7">App\Global\Business\Provider\OrderItemProvider</a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Presentation/Session/SessionHandler.php.html#5">App\Global\Presentation\Session\SessionHandler</a></td><td class="text-right">8</td></tr>
+       <tr><td><a href="Business/Dependency/Container.php.html#7">App\Global\Business\Dependency\Container</a></td><td class="text-right">7</td></tr>
+       <tr><td><a href="Business/Mapper/ApiMapper.php.html#8">App\Global\Business\Mapper\ApiMapper</a></td><td class="text-right">3</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Business/Dependency/Container.php.html#21"><abbr title="App\Global\Business\Dependency\Container::getList">getList</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Business/Dependency/DependencyProvider.php.html#32"><abbr title="App\Global\Business\Dependency\DependencyProvider::provide">provide</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Business/Mapper/ApiMapper.php.html#35"><abbr title="App\Global\Business\Mapper\ApiMapper::MapBasket">MapBasket</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Business/Mapper/BillingMapper.php.html#9"><abbr title="App\Global\Business\Mapper\BillingMapper::mapBilling">mapBilling</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Business/Mapper/ClientMapper.php.html#10"><abbr title="App\Global\Business\Mapper\ClientMapper::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Business/Mapper/ClientMapper.php.html#14"><abbr title="App\Global\Business\Mapper\ClientMapper::mapFromArray2Dto">mapFromArray2Dto</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Business/Provider/OrderItemProvider.php.html#9"><abbr title="App\Global\Business\Provider\OrderItemProvider::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Business/Provider/OrderItemProvider.php.html#12"><abbr title="App\Global\Business\Provider\OrderItemProvider::getItems">getItems</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Business/Redirect/Redirect.php.html#12"><abbr title="App\Global\Business\Redirect\Redirect::to">to</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Persistence/API/ApiCache.php.html#13"><abbr title="App\Global\Persistence\API\ApiCache::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Persistence/API/ApiCache.php.html#17"><abbr title="App\Global\Persistence\API\ApiCache::getData">getData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Persistence/API/ApiCache.php.html#41"><abbr title="App\Global\Persistence\API\ApiCache::isCacheValid">isCacheValid</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Persistence/API/ApiCache.php.html#50"><abbr title="App\Global\Persistence\API\ApiCache::loadFromCache">loadFromCache</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Persistence/API/ApiCache.php.html#54"><abbr title="App\Global\Persistence\API\ApiCache::saveToCache">saveToCache</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Persistence/API/ApiCache.php.html#60"><abbr title="App\Global\Persistence\API\ApiCache::getCacheFilePath">getCacheFilePath</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Persistence/API/ApiHandling.php.html#7"><abbr title="App\Global\Persistence\API\ApiHandling::makeApiRequest">makeApiRequest</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Persistence/API/ApiHandling.php.html#16"><abbr title="App\Global\Persistence\API\ApiHandling::requestPlayers">requestPlayers</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Persistence/API/ApiHandling.php.html#21"><abbr title="App\Global\Persistence\API\ApiHandling::requestItemInfo">requestItemInfo</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Persistence/SQL/SqlConnector.php.html#48"><abbr title="App\Global\Persistence\SQL\SqlConnector::executeInsertQuery">executeInsertQuery</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Persistence/SQL/SqlConnector.php.html#62"><abbr title="App\Global\Persistence\SQL\SqlConnector::executeDeleteQuery">executeDeleteQuery</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Presentation/Session/SessionHandler.php.html#9"><abbr title="App\Global\Presentation\Session\SessionHandler::getSessionMail">getSessionMail</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Presentation/Session/SessionHandler.php.html#28"><abbr title="App\Global\Presentation\Session\SessionHandler::setOrderSession">setOrderSession</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Persistence/SQL/SqlConnector.php.html#36"><abbr title="App\Global\Persistence\SQL\SqlConnector::executeSelectQuery">executeSelectQuery</abbr></a></td><td class="text-right">66%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Persistence/API/ApiCache.php.html#17"><abbr title="App\Global\Persistence\API\ApiCache::getData">getData</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Presentation/Session/SessionHandler.php.html#28"><abbr title="App\Global\Presentation\Session\SessionHandler::setOrderSession">setOrderSession</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Business/Dependency/Container.php.html#21"><abbr title="App\Global\Business\Dependency\Container::getList">getList</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Business/Mapper/ClientMapper.php.html#14"><abbr title="App\Global\Business\Mapper\ClientMapper::mapFromArray2Dto">mapFromArray2Dto</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Business/Provider/OrderItemProvider.php.html#12"><abbr title="App\Global\Business\Provider\OrderItemProvider::getItems">getItems</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Persistence/API/ApiCache.php.html#41"><abbr title="App\Global\Persistence\API\ApiCache::isCacheValid">isCacheValid</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Persistence/API/ApiCache.php.html#54"><abbr title="App\Global\Persistence\API\ApiCache::saveToCache">saveToCache</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Persistence/SQL/SqlConnector.php.html#48"><abbr title="App\Global\Persistence\SQL\SqlConnector::executeInsertQuery">executeInsertQuery</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Persistence/SQL/SqlConnector.php.html#62"><abbr title="App\Global\Persistence\SQL\SqlConnector::executeDeleteQuery">executeDeleteQuery</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Persistence/SQL/SqlConnector.php.html#36"><abbr title="App\Global\Persistence\SQL\SqlConnector::executeSelectQuery">executeSelectQuery</abbr></a></td><td class="text-right">2</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 10.1.7</a> using <a href="https://www.php.net/" target="_top">PHP 8.1.2-1ubuntu2.14</a> and <a href="https://phpunit.de/">PHPUnit 10.4.1</a> at Wed Nov 8 14:29:20 UTC 2023.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../_js/jquery.min.js?v=10.1.7" type="text/javascript"></script>
+  <script src="../_js/d3.min.js?v=10.1.7" type="text/javascript"></script>
+  <script src="../_js/nv.d3.min.js?v=10.1.7" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([7,0,0,0,0,2,0,0,2,0,0,8], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([22,0,0,0,0,0,0,1,0,0,0,22], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[100,0,"<a href=\"Business\/DTO\/ClientDTO.php.html#5\">App\\Global\\Business\\DTO\\ClientDTO<\/a>"],[100,2,"<a href=\"Business\/DTO\/ErrorDTO.php.html#5\">App\\Global\\Business\\DTO\\ErrorDTO<\/a>"],[100,0,"<a href=\"Business\/DTO\/OrderDTO.php.html#5\">App\\Global\\Business\\DTO\\OrderDTO<\/a>"],[100,0,"<a href=\"Business\/DTO\/PlayerDTO.php.html#5\">App\\Global\\Business\\DTO\\PlayerDTO<\/a>"],[40,4,"<a href=\"Business\/Dependency\/Container.php.html#7\">App\\Global\\Business\\Dependency\\Container<\/a>"],[0,1,"<a href=\"Business\/Dependency\/DependencyProvider.php.html#30\">App\\Global\\Business\\Dependency\\DependencyProvider<\/a>"],[70,3,"<a href=\"Business\/Mapper\/ApiMapper.php.html#8\">App\\Global\\Business\\Mapper\\ApiMapper<\/a>"],[0,1,"<a href=\"Business\/Mapper\/BillingMapper.php.html#7\">App\\Global\\Business\\Mapper\\BillingMapper<\/a>"],[0,3,"<a href=\"Business\/Mapper\/ClientMapper.php.html#8\">App\\Global\\Business\\Mapper\\ClientMapper<\/a>"],[100,1,"<a href=\"Business\/Provider\/ControllerProvider.php.html#16\">App\\Global\\Business\\Provider\\ControllerProvider<\/a>"],[0,3,"<a href=\"Business\/Provider\/OrderItemProvider.php.html#7\">App\\Global\\Business\\Provider\\OrderItemProvider<\/a>"],[0,1,"<a href=\"Business\/Redirect\/Redirect.php.html#8\">App\\Global\\Business\\Redirect\\Redirect<\/a>"],[100,1,"<a href=\"Business\/Redirect\/RedirectSpy.php.html#7\">App\\Global\\Business\\Redirect\\RedirectSpy<\/a>"],[100,3,"<a href=\"Business\/Redirect\/SearchEngine.php.html#7\">App\\Global\\Business\\Redirect\\SearchEngine<\/a>"],[0,12,"<a href=\"Persistence\/API\/ApiCache.php.html#7\">App\\Global\\Persistence\\API\\ApiCache<\/a>"],[0,3,"<a href=\"Persistence\/API\/ApiHandling.php.html#6\">App\\Global\\Persistence\\API\\ApiHandling<\/a>"],[48.148148148148145,11,"<a href=\"Persistence\/SQL\/SqlConnector.php.html#7\">App\\Global\\Persistence\\SQL\\SqlConnector<\/a>"],[76.19047619047619,8,"<a href=\"Presentation\/Session\/SessionHandler.php.html#5\">App\\Global\\Presentation\\Session\\SessionHandler<\/a>"],[100,6,"<a href=\"Presentation\/TemplateEngine\/TemplateEngine.php.html#8\">App\\Global\\Presentation\\TemplateEngine\\TemplateEngine<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[100,1,"<a href=\"Business\/DTO\/ErrorDTO.php.html#7\">App\\Global\\Business\\DTO\\ErrorDTO::__construct<\/a>"],[100,1,"<a href=\"Business\/DTO\/ErrorDTO.php.html#13\">App\\Global\\Business\\DTO\\ErrorDTO::getMessage<\/a>"],[100,1,"<a href=\"Business\/Dependency\/Container.php.html#11\">App\\Global\\Business\\Dependency\\Container::set<\/a>"],[100,1,"<a href=\"Business\/Dependency\/Container.php.html#16\">App\\Global\\Business\\Dependency\\Container::get<\/a>"],[0,2,"<a href=\"Business\/Dependency\/Container.php.html#21\">App\\Global\\Business\\Dependency\\Container::getList<\/a>"],[0,1,"<a href=\"Business\/Dependency\/DependencyProvider.php.html#32\">App\\Global\\Business\\Dependency\\DependencyProvider::provide<\/a>"],[100,2,"<a href=\"Business\/Mapper\/ApiMapper.php.html#14\">App\\Global\\Business\\Mapper\\ApiMapper::Map<\/a>"],[0,1,"<a href=\"Business\/Mapper\/ApiMapper.php.html#35\">App\\Global\\Business\\Mapper\\ApiMapper::MapBasket<\/a>"],[0,1,"<a href=\"Business\/Mapper\/BillingMapper.php.html#9\">App\\Global\\Business\\Mapper\\BillingMapper::mapBilling<\/a>"],[0,1,"<a href=\"Business\/Mapper\/ClientMapper.php.html#10\">App\\Global\\Business\\Mapper\\ClientMapper::__construct<\/a>"],[0,2,"<a href=\"Business\/Mapper\/ClientMapper.php.html#14\">App\\Global\\Business\\Mapper\\ClientMapper::mapFromArray2Dto<\/a>"],[100,1,"<a href=\"Business\/Provider\/ControllerProvider.php.html#18\">App\\Global\\Business\\Provider\\ControllerProvider::getList<\/a>"],[0,1,"<a href=\"Business\/Provider\/OrderItemProvider.php.html#9\">App\\Global\\Business\\Provider\\OrderItemProvider::__construct<\/a>"],[0,2,"<a href=\"Business\/Provider\/OrderItemProvider.php.html#12\">App\\Global\\Business\\Provider\\OrderItemProvider::getItems<\/a>"],[0,1,"<a href=\"Business\/Redirect\/Redirect.php.html#12\">App\\Global\\Business\\Redirect\\Redirect::to<\/a>"],[100,1,"<a href=\"Business\/Redirect\/RedirectSpy.php.html#10\">App\\Global\\Business\\Redirect\\RedirectSpy::to<\/a>"],[100,1,"<a href=\"Business\/Redirect\/SearchEngine.php.html#10\">App\\Global\\Business\\Redirect\\SearchEngine::__construct<\/a>"],[100,2,"<a href=\"Business\/Redirect\/SearchEngine.php.html#14\">App\\Global\\Business\\Redirect\\SearchEngine::search<\/a>"],[0,1,"<a href=\"Persistence\/API\/ApiCache.php.html#13\">App\\Global\\Persistence\\API\\ApiCache::__construct<\/a>"],[0,5,"<a href=\"Persistence\/API\/ApiCache.php.html#17\">App\\Global\\Persistence\\API\\ApiCache::getData<\/a>"],[0,2,"<a href=\"Persistence\/API\/ApiCache.php.html#41\">App\\Global\\Persistence\\API\\ApiCache::isCacheValid<\/a>"],[0,1,"<a href=\"Persistence\/API\/ApiCache.php.html#50\">App\\Global\\Persistence\\API\\ApiCache::loadFromCache<\/a>"],[0,2,"<a href=\"Persistence\/API\/ApiCache.php.html#54\">App\\Global\\Persistence\\API\\ApiCache::saveToCache<\/a>"],[0,1,"<a href=\"Persistence\/API\/ApiCache.php.html#60\">App\\Global\\Persistence\\API\\ApiCache::getCacheFilePath<\/a>"],[0,1,"<a href=\"Persistence\/API\/ApiHandling.php.html#7\">App\\Global\\Persistence\\API\\ApiHandling::makeApiRequest<\/a>"],[0,1,"<a href=\"Persistence\/API\/ApiHandling.php.html#16\">App\\Global\\Persistence\\API\\ApiHandling::requestPlayers<\/a>"],[0,1,"<a href=\"Persistence\/API\/ApiHandling.php.html#21\">App\\Global\\Persistence\\API\\ApiHandling::requestItemInfo<\/a>"],[100,1,"<a href=\"Persistence\/SQL\/SqlConnector.php.html#13\">App\\Global\\Persistence\\SQL\\SqlConnector::__construct<\/a>"],[100,2,"<a href=\"Persistence\/SQL\/SqlConnector.php.html#17\">App\\Global\\Persistence\\SQL\\SqlConnector::connect<\/a>"],[100,1,"<a href=\"Persistence\/SQL\/SqlConnector.php.html#31\">App\\Global\\Persistence\\SQL\\SqlConnector::getDatabaseName<\/a>"],[66.66666666666666,2,"<a href=\"Persistence\/SQL\/SqlConnector.php.html#36\">App\\Global\\Persistence\\SQL\\SqlConnector::executeSelectQuery<\/a>"],[0,2,"<a href=\"Persistence\/SQL\/SqlConnector.php.html#48\">App\\Global\\Persistence\\SQL\\SqlConnector::executeInsertQuery<\/a>"],[0,2,"<a href=\"Persistence\/SQL\/SqlConnector.php.html#62\">App\\Global\\Persistence\\SQL\\SqlConnector::executeDeleteQuery<\/a>"],[100,1,"<a href=\"Persistence\/SQL\/SqlConnector.php.html#79\">App\\Global\\Persistence\\SQL\\SqlConnector::closeConnection<\/a>"],[0,1,"<a href=\"Presentation\/Session\/SessionHandler.php.html#9\">App\\Global\\Presentation\\Session\\SessionHandler::getSessionMail<\/a>"],[100,1,"<a href=\"Presentation\/Session\/SessionHandler.php.html#14\">App\\Global\\Presentation\\Session\\SessionHandler::unsetSession<\/a>"],[100,2,"<a href=\"Presentation\/Session\/SessionHandler.php.html#20\">App\\Global\\Presentation\\Session\\SessionHandler::setSession<\/a>"],[0,3,"<a href=\"Presentation\/Session\/SessionHandler.php.html#28\">App\\Global\\Presentation\\Session\\SessionHandler::setOrderSession<\/a>"],[100,1,"<a href=\"Presentation\/Session\/SessionHandler.php.html#37\">App\\Global\\Presentation\\Session\\SessionHandler::getOrderSession<\/a>"],[100,1,"<a href=\"Presentation\/TemplateEngine\/TemplateEngine.php.html#15\">App\\Global\\Presentation\\TemplateEngine\\TemplateEngine::__construct<\/a>"],[100,1,"<a href=\"Presentation\/TemplateEngine\/TemplateEngine.php.html#22\">App\\Global\\Presentation\\TemplateEngine\\TemplateEngine::addParameter<\/a>"],[100,1,"<a href=\"Presentation\/TemplateEngine\/TemplateEngine.php.html#27\">App\\Global\\Presentation\\TemplateEngine\\TemplateEngine::display<\/a>"],[100,1,"<a href=\"Presentation\/TemplateEngine\/TemplateEngine.php.html#32\">App\\Global\\Presentation\\TemplateEngine\\TemplateEngine::setTemplate<\/a>"],[100,1,"<a href=\"Presentation\/TemplateEngine\/TemplateEngine.php.html#37\">App\\Global\\Presentation\\TemplateEngine\\TemplateEngine::getParameters<\/a>"],[100,1,"<a href=\"Presentation\/TemplateEngine\/TemplateEngine.php.html#42\">App\\Global\\Presentation\\TemplateEngine\\TemplateEngine::getTpl<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

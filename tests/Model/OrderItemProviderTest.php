@@ -2,30 +2,30 @@
 
 namespace Model;
 
+use App\Components\Homepage\Persistence\Repository\PlayerRepository;
+use App\Components\Order\Persistence\Entity\OrderEntityManager;
+use App\Components\Order\Persistence\Repository\OrderRepository;
+use App\Components\User\Persistence\Entity\UserEntityManager;
+use App\Components\User\Persistence\Repository\UserRepository;
 use App\Global\Business\DTO\ClientDTO;
 use App\Global\Business\Provider\OrderItemProvider;
-use App\Global\Persistence\Repository\ClientRepository;
-use App\Global\Persistence\Repository\OrderRepository;
-use App\Global\Persistence\Repository\PlayerRepository;
 use App\Global\Persistence\SQL\SqlConnector;
-use App\User\Components\Order\Persistence\Entity\OrderEntityManager;
-use App\User\Components\Registration\Persistence\Entity\ClientEntityManager;
 use PHPUnit\Framework\TestCase;
 
 class OrderItemProviderTest extends TestCase
 {
-    public ClientEntityManager $clientEntityManager;
+    public UserEntityManager $clientEntityManager;
     public OrderRepository $orderRepository;
     public SqlConnector $sqlConnector;
     public OrderEntityManager $orderEntityManager;
-    public ClientRepository $clientRepository;
+    public UserRepository $clientRepository;
     public OrderItemProvider $itemProvider;
 
     public function setUp(): void
     {
-        $this->clientRepository = new ClientRepository();
+        $this->clientRepository = new UserRepository();
         $this->sqlConnector = new SqlConnector();
-        $this->clientEntityManager = new ClientEntityManager();
+        $this->clientEntityManager = new UserEntityManager();
         $this->playerRepository = new PlayerRepository();
         $this->orderRepository = new OrderRepository();
         $this->orderEntityManager = new OrderEntityManager();

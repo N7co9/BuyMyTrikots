@@ -2,6 +2,15 @@
 
 namespace Tests\Core;
 
+use App\Components\Basket\Business\Manipulation\BasketManipulator;
+use App\Components\Basket\Persistence\Repository\BasketRepository;
+use App\Components\Checkout\Business\Validation\BillingValidator;
+use App\Components\Homepage\Persistence\Repository\PlayerRepository;
+use App\Components\Order\Persistence\Entity\OrderEntityManager;
+use App\Components\Order\Persistence\Repository\OrderRepository;
+use App\Components\User\Business\Validation\UserValidator;
+use App\Components\User\Persistence\Entity\UserEntityManager;
+use App\Components\User\Persistence\Repository\UserRepository;
 use App\Global\Business\Dependency\Container;
 use App\Global\Business\Dependency\DependencyProvider;
 use App\Global\Business\DTO\ClientDTO;
@@ -9,17 +18,8 @@ use App\Global\Business\Mapper\ClientMapper;
 use App\Global\Business\Redirect\Redirect;
 use App\Global\Business\Redirect\RedirectSpy;
 use App\Global\Business\Redirect\SearchEngine;
-use App\Global\Persistence\Repository\ClientRepository;
-use App\Global\Persistence\Repository\OrderRepository;
-use App\Global\Persistence\Repository\PlayerRepository;
 use App\Global\Presentation\Session\SessionHandler;
 use App\Global\Presentation\TemplateEngine\TemplateEngine;
-use App\User\Components\Basket\Business\Manipulation\BasketManipulator;
-use App\User\Components\Basket\Persistence\Repository\BasketRepository;
-use App\User\Components\Checkout\Business\Validation\BillingValidator;
-use App\User\Components\Order\Persistence\Entity\OrderEntityManager;
-use App\User\Components\Registration\Business\Validation\ClientValidator;
-use App\User\Components\Registration\Persistence\Entity\ClientEntityManager;
 use PHPUnit\Framework\TestCase;
 
 class DependencyProviderTest extends TestCase
@@ -42,20 +42,20 @@ class DependencyProviderTest extends TestCase
         $this->assertInstanceOf(PlayerRepository::class, $container->get(PlayerRepository::class));
 
         // ClientRepository
-        $this->assertTrue($this->instanceInArray(ClientRepository::class, $container->getList()));
-        $this->assertInstanceOf(ClientRepository::class, $container->get(ClientRepository::class));
+        $this->assertTrue($this->instanceInArray(UserRepository::class, $container->getList()));
+        $this->assertInstanceOf(UserRepository::class, $container->get(UserRepository::class));
 
         // ClientEntityManager
-        $this->assertTrue($this->instanceInArray(ClientEntityManager::class, $container->getList()));
-        $this->assertInstanceOf(ClientEntityManager::class, $container->get(ClientEntityManager::class));
+        $this->assertTrue($this->instanceInArray(UserEntityManager::class, $container->getList()));
+        $this->assertInstanceOf(UserEntityManager::class, $container->get(UserEntityManager::class));
 
         // ClientMapper
         $this->assertTrue($this->instanceInArray(ClientMapper::class, $container->getList()));
         $this->assertInstanceOf(ClientMapper::class, $container->get(ClientMapper::class));
 
         // ClientValidator
-        $this->assertTrue($this->instanceInArray(ClientValidator::class, $container->getList()));
-        $this->assertInstanceOf(ClientValidator::class, $container->get(ClientValidator::class));
+        $this->assertTrue($this->instanceInArray(UserValidator::class, $container->getList()));
+        $this->assertInstanceOf(UserValidator::class, $container->get(UserValidator::class));
 
         // SearchEngine
         $this->assertTrue($this->instanceInArray(SearchEngine::class, $container->getList()));

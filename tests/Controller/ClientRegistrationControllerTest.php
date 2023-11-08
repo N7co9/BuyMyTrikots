@@ -2,34 +2,34 @@
 
 namespace Controller;
 
+use App\Components\User\Communication\Controller\UserRegistrationController;
+use App\Components\User\Persistence\Entity\UserEntityManager;
+use App\Components\User\Persistence\Repository\UserRepository;
 use App\Global\Business\Dependency\Container;
 use App\Global\Business\Dependency\DependencyProvider;
 use App\Global\Business\DTO\ClientDTO;
-use App\Global\Persistence\Repository\ClientRepository;
 use App\Global\Persistence\SQL\SqlConnector;
-use App\User\Components\Registration\Communication\Controller\ClientRegistrationController;
-use App\User\Components\Registration\Persistence\Entity\ClientEntityManager;
 use PHPUnit\Framework\TestCase;
 
 class ClientRegistrationControllerTest extends TestCase
 {
     public SqlConnector $sqlConnector;
-    public ClientEntityManager $entityManager;
-    public ClientRepository $clientRepository;
+    public UserEntityManager $entityManager;
+    public UserRepository $clientRepository;
 
     protected function setUp(): void
     {
         $this->sqlConnector = new SqlConnector();
 
-        $this->clientRepository = new ClientRepository();
+        $this->clientRepository = new UserRepository();
 
         $containerBuilder = new Container();
         $dependencyProvider = new DependencyProvider();
         $dependencyProvider->provide($containerBuilder);
 
         $this->container = $containerBuilder;
-        $this->construct = new ClientRegistrationController($this->container);
-        $this->entityManager = new ClientEntityManager();
+        $this->construct = new UserRegistrationController($this->container);
+        $this->entityManager = new UserEntityManager();
 
         parent::setUp();
     }

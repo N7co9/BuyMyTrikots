@@ -2,8 +2,8 @@
 
 namespace App\Global\Business\Mapper;
 
+use App\Components\Basket\Business\DTO\BasketDTO;
 use App\Global\Business\DTO\PlayerDTO;
-use App\User\Components\Basket\Business\DTO\BasketDTO;
 
 class ApiMapper
 {

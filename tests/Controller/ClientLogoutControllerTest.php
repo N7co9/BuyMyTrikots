@@ -2,19 +2,19 @@
 
 namespace Controller;
 
+use App\Components\User\Communication\Controller\UserLogoutController;
 use App\Core\Redirect\ReSpy;
 use App\Global\Business\Dependency\Container;
 use App\Global\Business\Redirect\Redirect;
 use App\Global\Business\Redirect\RedirectSpy;
 use App\Global\Persistence\SQL\SqlConnector;
 use App\Global\Presentation\Session\SessionHandler;
-use App\User\Components\Logout\Communication\Controller\ClientLogoutController;
 use PHPUnit\Framework\TestCase;
 
 class ClientLogoutControllerTest extends TestCase
 {
     public RedirectSpy $redirectSpy;
-    private ClientLogoutController $clientLogoutController;
+    private UserLogoutController $clientLogoutController;
     private SessionHandler $sessionHandler;
 
     protected function setUp(): void
@@ -26,7 +26,7 @@ class ClientLogoutControllerTest extends TestCase
         $container->set(Redirect::class, $this->redirectSpy);
         $container->set(SessionHandler::class, new SessionHandler());
 
-        $this->clientLogoutController = new ClientLogoutController($container);
+        $this->clientLogoutController = new UserLogoutController($container);
 
         parent::setUp();
     }

@@ -2,25 +2,25 @@
 
 namespace Model;
 
+use App\Components\Basket\Business\DTO\BasketDTO;
+use App\Components\Basket\Persistence\Repository\BasketRepository;
+use App\Components\User\Persistence\Entity\UserEntityManager;
+use App\Components\User\Persistence\Repository\UserRepository;
 use App\Global\Business\DTO\ClientDTO;
-use App\Global\Persistence\Repository\ClientRepository;
 use App\Global\Persistence\SQL\SqlConnector;
-use App\User\Components\Basket\Business\DTO\BasketDTO;
-use App\User\Components\Basket\Persistence\Repository\BasketRepository;
-use App\User\Components\Registration\Persistence\Entity\ClientEntityManager;
 use PHPUnit\Framework\TestCase;
 
 class BasketRepositoryTest extends TestCase
 {
     private BasketRepository $basketRepository;
-    private ClientEntityManager $clientEntityManager;
-    private ClientRepository $clientRepository;
+    private UserEntityManager $clientEntityManager;
+    private UserRepository $clientRepository;
 
     public function setUp(): void
     {
         $this->basketRepository = new BasketRepository();
-        $this->clientRepository = new ClientRepository();
-        $this->clientEntityManager = new ClientEntityManager();
+        $this->clientRepository = new UserRepository();
+        $this->clientEntityManager = new UserEntityManager();
 
         $ClientDTO = new ClientDTO();
         $ClientDTO->email = 'TEST@TEST.com';
