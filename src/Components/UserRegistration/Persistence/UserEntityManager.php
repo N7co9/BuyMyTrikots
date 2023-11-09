@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Components\User\Persistence\Entity;
+namespace App\Components\UserRegistration\Persistence;
 
 use App\Global\Business\DTO\ClientDTO;
 use App\Global\Persistence\SQL\SqlConnector;

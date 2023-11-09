@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Components\User\Persistence\Repository;
+namespace App\Components\UserSession\Persistence;
 
 use App\Global\Business\DTO\ClientDTO;
 use App\Global\Business\Mapper\ClientMapper;

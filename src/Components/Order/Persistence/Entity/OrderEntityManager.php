@@ -2,28 +2,32 @@
 
 namespace App\Components\Order\Persistence\Entity;
 
-use App\Components\Basket\Business\Manipulation\TotalManipulator;
-use App\Components\User\Persistence\Repository\UserRepository;
+use App\Components\Basket\Business\BasketBusinessFacade;
+use App\Components\UserSession\Persistence\UserRepository;
 use App\Global\Business\DTO\OrderDTO;
 use App\Global\Business\Provider\OrderItemProvider;
 use App\Global\Persistence\SQL\SqlConnector;
-use JsonException;
 
-readonly class OrderEntityManager
+class OrderEntityManager
 {
-    public function __construct(private UserRepository   $userRepository, private SqlConnector $sqlConnector,
-                                private TotalManipulator $totalCalculator, private OrderItemProvider $itemProvider)
+    public function __construct(
+        private UserRepository   $userRepository,
+        private SqlConnector $sqlConnector,
+        private BasketBusinessFacade $basketBusinessFacade,
+        private OrderItemProvider $itemProvider
+    )
     {
     }
-    public function saveOrder(OrderDTO $orderDTO) : string
+
+    public function saveOrder(OrderDTO $orderDTO): string
     {
         $query = "INSERT INTO orders (user_id, firstName, lastName, city, zip, delivery, payment, email, items, total) VALUES (:user_id, :firstName, :lastName, :city, :zip, :delivery, :payment, :email, :items, :total)";
 
         $items = $this->itemProvider->getItems();
 
-        $encodedItems= json_encode($items);
+        $encodedItems = json_encode($items);
 
-        $total = $this->totalCalculator->calculateTotal();
+        $total = $this->basketBusinessFacade->calculateTotal();
 
         $params = [
             ':user_id' => $this->userRepository->getUserID($_SESSION['mail']),

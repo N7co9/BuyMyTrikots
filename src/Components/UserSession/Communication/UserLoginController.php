@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Components\User\Communication\Controller;
+namespace App\Components\UserSession\Communication;
 
-use App\Components\User\Persistence\Repository\UserCredentialsRepository;
+use App\Components\UserSession\Persistence\UserCredentialsRepository;
 use App\Global\Business\Dependency\Container;
 use App\Global\Business\DTO\ClientDTO;
 use App\Global\Business\Redirect\Redirect;

@@ -2,8 +2,8 @@
 
 namespace Controller;
 
-use App\Components\User\Communication\Controller\UserLoginController;
-use App\Components\User\Persistence\Entity\UserEntityManager;
+use App\Components\UserRegistration\Persistence\UserEntityManager;
+use App\Components\UserSession\Communication\UserLoginController;
 use App\Global\Business\Dependency\Container;
 use App\Global\Business\Dependency\DependencyProvider;
 use App\Global\Business\DTO\ClientDTO;

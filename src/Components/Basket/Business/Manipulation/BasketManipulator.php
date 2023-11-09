@@ -3,10 +3,10 @@
 namespace App\Components\Basket\Business\Manipulation;
 
 use App\Components\Basket\Persistence\Entity\BasketEntityManager;
-use App\Components\User\Persistence\Repository\UserRepository;
+use App\Components\UserSession\Persistence\UserRepository;
 use App\Global\Presentation\Session\SessionHandler;
 
-readonly class BasketManipulator
+class BasketManipulator
 {
     public function __construct(private SessionHandler $sessionHandler, private UserRepository $userRepository, private BasketEntityManager $basketEntityManager)
     {

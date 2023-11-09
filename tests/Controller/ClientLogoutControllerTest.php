@@ -2,7 +2,7 @@
 
 namespace Controller;
 
-use App\Components\User\Communication\Controller\UserLogoutController;
+use App\Components\UserSession\Communication\UserLogoutController;
 use App\Core\Redirect\ReSpy;
 use App\Global\Business\Dependency\Container;
 use App\Global\Business\Redirect\Redirect;

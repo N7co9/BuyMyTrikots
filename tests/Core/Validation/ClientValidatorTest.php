@@ -2,7 +2,7 @@
 
 namespace Core\Validation;
 
-use App\Components\User\Business\Validation\UserValidator;
+use App\Components\UserRegistration\Business\Validation\UserValidator;
 use App\Global\Business\DTO\ClientDTO;
 use App\Global\Business\DTO\ErrorDTO;
 use PHPUnit\Framework\TestCase;

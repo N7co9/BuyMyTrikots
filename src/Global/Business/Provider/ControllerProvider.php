@@ -8,9 +8,9 @@ use App\Components\Checkout\Communication\Controller\CheckoutController;
 use App\Components\Homepage\Communication\Controller\HomepageController;
 use App\Components\Order\Communication\Controller\OrderOverviewController;
 use App\Components\ThankYou\Communication\Controller\ThankYouController;
-use App\Components\User\Communication\Controller\UserLoginController;
-use App\Components\User\Communication\Controller\UserLogoutController;
-use App\Components\User\Communication\Controller\UserRegistrationController;
+use App\Components\UserRegistration\Communication\UserRegistrationController;
+use App\Components\UserSession\Communication\UserLoginController;
+use App\Components\UserSession\Communication\UserLogoutController;
 
 
 class ControllerProvider

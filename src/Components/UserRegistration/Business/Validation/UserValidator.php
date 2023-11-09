@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Components\User\Business\Validation;
+namespace App\Components\UserRegistration\Business\Validation;
 
 use App\Global\Business\DTO\ErrorDTO;
 

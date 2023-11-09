@@ -2,10 +2,13 @@
 
 namespace Model;
 
-use App\Components\Basket\Business\DTO\BasketDTO;
+use App\Components\Basket\Persistence\Entity\BasketEntityManager;
 use App\Components\Basket\Persistence\Repository\BasketRepository;
-use App\Components\User\Persistence\Entity\UserEntityManager;
-use App\Components\User\Persistence\Repository\UserRepository;
+use App\Components\UserRegistration\Persistence\UserEntityManager;
+use App\Components\UserSession\Persistence\UserRepository;
+use App\Global\Business\Dependency\Container;
+use App\Global\Business\Dependency\DependencyProvider;
+use App\Global\Business\DTO\BasketDTO;
 use App\Global\Business\DTO\ClientDTO;
 use App\Global\Persistence\SQL\SqlConnector;
 use PHPUnit\Framework\TestCase;
@@ -13,20 +16,26 @@ use PHPUnit\Framework\TestCase;
 class BasketRepositoryTest extends TestCase
 {
     private BasketRepository $basketRepository;
-    private UserEntityManager $clientEntityManager;
-    private UserRepository $clientRepository;
+    private UserEntityManager $userEntityManager;
+    private UserRepository $userRepository;
+    private BasketEntityManager $basketEntityManager;
 
     public function setUp(): void
     {
-        $this->basketRepository = new BasketRepository();
-        $this->clientRepository = new UserRepository();
-        $this->clientEntityManager = new UserEntityManager();
+        $container = new Container();
+        $provider = new DependencyProvider();
+        $provider->provide($container);
+
+        $this->basketRepository = $container->get(BasketRepository::class);
+        $this->userRepository = $container->get(UserRepository::class);
+        $this->userEntityManager = $container->get(UserEntityManager::class);
+        $this->basketEntityManager = $container->get(BasketEntityManager::class);
 
         $ClientDTO = new ClientDTO();
         $ClientDTO->email = 'TEST@TEST.com';
         $ClientDTO->username = 'TEST';
         $ClientDTO->password = 'QWERTZ';
-        $this->clientEntityManager->saveCredentials($ClientDTO);
+        $this->userEntityManager->saveCredentials($ClientDTO);
 
         parent::setUp();
     }
@@ -35,7 +44,7 @@ class BasketRepositoryTest extends TestCase
     {
         $_SESSION['mail'] = 'TEST@TEST.com';
 
-        $this->clientEntityManager->addToBasket('44', $this->clientRepository->getUserID($_SESSION['mail']));
+        $this->basketEntityManager->addToBasket('44', $this->userRepository->getUserID($_SESSION['mail']));
 
         $basket = $this->basketRepository->getBasketInfo();
 
@@ -49,8 +58,8 @@ class BasketRepositoryTest extends TestCase
     {
         $_SESSION['mail'] = 'TEST@TEST.com';
 
-        $this->clientEntityManager->addToBasket('44', $this->clientRepository->getUserID($_SESSION['mail']));
-        $this->clientEntityManager->addToBasket('334', $this->clientRepository->getUserID($_SESSION['mail']));
+        $this->basketEntityManager->addToBasket('44', $this->userRepository->getUserID($_SESSION['mail']));
+        $this->basketEntityManager->addToBasket('334', $this->userRepository->getUserID($_SESSION['mail']));
 
 
         $basket = $this->basketRepository->getBasketInfo();
@@ -68,7 +77,7 @@ class BasketRepositoryTest extends TestCase
     {
         $_SESSION['mail'] = 'TEST@TEST.com';
 
-        $this->clientEntityManager->addToBasket('44', $this->clientRepository->getUserID($_SESSION['mail']));
+        $this->basketEntityManager->addToBasket('44', $this->userRepository->getUserID($_SESSION['mail']));
 
         $quantity = $this->basketRepository->getItemQuantity(44);
 
@@ -79,7 +88,7 @@ class BasketRepositoryTest extends TestCase
     {
         $_SESSION['mail'] = 'TEST@TEST.com';
 
-        $this->clientEntityManager->addToBasket('44', $this->clientRepository->getUserID($_SESSION['mail']));
+        $this->basketEntityManager->addToBasket('44', $this->userRepository->getUserID($_SESSION['mail']));
 
         $total = $this->basketRepository->getBasketTotal();
 
@@ -91,8 +100,8 @@ class BasketRepositoryTest extends TestCase
     {
         $_SESSION['mail'] = 'TEST@TEST.com';
 
-        $this->clientEntityManager->addToBasket('44', $this->clientRepository->getUserID($_SESSION['mail']));
-        $this->clientEntityManager->addToBasket('44', $this->clientRepository->getUserID($_SESSION['mail']));
+        $this->basketEntityManager->addToBasket('44', $this->userRepository->getUserID($_SESSION['mail']));
+        $this->basketEntityManager->addToBasket('44', $this->userRepository->getUserID($_SESSION['mail']));
 
 
         $total = $this->basketRepository->getBasketTotal();

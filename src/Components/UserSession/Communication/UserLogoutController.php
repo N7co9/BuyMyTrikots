@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Components\User\Communication\Controller;
+namespace App\Components\UserSession\Communication;
 
 use App\Global\Business\Dependency\Container;
 use App\Global\Business\Redirect\Redirect;

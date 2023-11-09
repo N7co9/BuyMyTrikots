@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace App\Components\User\Communication\Controller;
+namespace App\Components\UserRegistration\Communication;
 
-use App\Components\User\Business\Validation\UserValidator;
-use App\Components\User\Persistence\Entity\UserEntityManager;
-use App\Components\User\Persistence\Repository\UserRepository;
+use App\Components\UserRegistration\Business\Validation\UserValidator;
+use App\Components\UserRegistration\Persistence\UserEntityManager;
+use App\Components\UserSession\Persistence\UserRepository;
 use App\Global\Business\Dependency\Container;
 use App\Global\Business\DTO\ClientDTO;
 use App\Global\Business\DTO\ErrorDTO;
@@ -59,6 +59,7 @@ class UserRegistrationController implements ControllerInterface
                 }
             }
         }
+
         $this->templateEngine->setTemplate('registration.twig');
         $this->templateEngine->addParameter('user', $clientDTO);
         $this->templateEngine->addParameter('vName', $clientDTO->username);

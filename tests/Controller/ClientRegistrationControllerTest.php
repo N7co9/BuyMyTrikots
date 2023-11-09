@@ -2,9 +2,9 @@
 
 namespace Controller;
 
-use App\Components\User\Communication\Controller\UserRegistrationController;
-use App\Components\User\Persistence\Entity\UserEntityManager;
-use App\Components\User\Persistence\Repository\UserRepository;
+use App\Components\UserRegistration\Communication\UserRegistrationController;
+use App\Components\UserRegistration\Persistence\UserEntityManager;
+use App\Components\UserSession\Persistence\UserRepository;
 use App\Global\Business\Dependency\Container;
 use App\Global\Business\Dependency\DependencyProvider;
 use App\Global\Business\DTO\ClientDTO;

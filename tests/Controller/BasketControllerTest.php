@@ -2,16 +2,16 @@
 
 namespace Controller;
 
-use App\Components\Basket\Business\DTO\BasketDTO;
 use App\Components\Basket\Communication\Controller\BasketController;
 use App\Components\Basket\Persistence\Repository\BasketRepository;
 use App\Components\Order\Persistence\Entity\OrderEntityManager;
 use App\Components\Order\Persistence\Repository\OrderRepository;
 use App\Components\ThankYou\Communication\Controller\ThankYouController;
-use App\Components\User\Persistence\Entity\UserEntityManager;
-use App\Components\User\Persistence\Repository\UserRepository;
+use App\Components\UserRegistration\Persistence\UserEntityManager;
+use App\Components\UserSession\Persistence\UserRepository;
 use App\Global\Business\Dependency\Container;
 use App\Global\Business\Dependency\DependencyProvider;
+use App\Global\Business\DTO\BasketDTO;
 use App\Global\Business\DTO\ClientDTO;
 use App\Global\Persistence\SQL\SqlConnector;
 use PHPUnit\Framework\TestCase;

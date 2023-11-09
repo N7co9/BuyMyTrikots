@@ -2,7 +2,7 @@
 
 namespace App\Components\Basket\Communication\Controller;
 
-use App\Components\Basket\Business\Manipulation\BasketManipulator;
+use App\Components\Basket\Business\BasketBusinessFacade;
 use App\Components\Basket\Persistence\Repository\BasketRepository;
 use App\Global\Business\Dependency\Container;
 use App\Global\Interface\Controller\ControllerInterface;
@@ -13,9 +13,7 @@ use App\Global\Presentation\TemplateEngine\TemplateEngine;
 class BasketController implements ControllerInterface
 {
     private TemplateEngine $templateEngine;
-
-    private BasketRepository $basketRepository;
-    private BasketManipulator $manipulator;
+    private BasketBusinessFacade $basketBusinessFacade;
     public SessionHandler $sessionHandler;
     public string $feedback;
     public function __construct(Container $container)
@@ -23,8 +21,7 @@ class BasketController implements ControllerInterface
         $this->feedback = '';
         $this->sessionHandler = $container->get(SessionHandler::class);
         $this->templateEngine = $container->get(TemplateEngine::class);
-        $this->basketRepository = $container->get(BasketRepository::class);
-        $this->manipulator = $container->get(BasketManipulator::class);
+        $this->basketBusinessFacade = $container->get(BasketBusinessFacade::class);
     }
 
     public function dataConstruct() : TemplateEngine
@@ -38,11 +35,11 @@ class BasketController implements ControllerInterface
 
         if (!empty($this->sessionHandler->getSessionMail()) && array_key_exists($action, $actionMap)) {
             $this->feedback = 'successful action';
-            $this->manipulator->{$actionMap[$action]}();
+            $this->basketBusinessFacade->{$actionMap[$action]}();
         }
 
-        $basketContent = $this->basketRepository->getBasketInfo();
-        $total = $this->basketRepository->getBasketTotal();
+        $basketContent = $this->basketBusinessFacade->getBasketInfo();
+        $total = $this->basketBusinessFacade->getBasketTotal();
 
         $this->templateEngine->addParameter('contents', $basketContent);
         $this->templateEngine->addParameter('total', $total);

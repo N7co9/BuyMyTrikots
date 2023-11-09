@@ -27,6 +27,3 @@ class Container
         return $array;
     }
 }
-
-// core
-// presentation global?

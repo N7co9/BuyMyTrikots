@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Components\Basket\Business\DTO;
+namespace App\Global\Business\DTO;
 
 class BasketDTO
 {

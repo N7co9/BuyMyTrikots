@@ -4,8 +4,8 @@ namespace Controller;
 
 use App\Components\Checkout\Business\Validation\BillingValidator;
 use App\Components\Checkout\Communication\Controller\CheckoutController;
-use App\Components\User\Communication\Controller\UserLoginController;
-use App\Components\User\Persistence\Entity\UserEntityManager;
+use App\Components\UserRegistration\Persistence\UserEntityManager;
+use App\Components\UserSession\Communication\UserLoginController;
 use App\Global\Business\Dependency\Container;
 use App\Global\Business\Dependency\DependencyProvider;
 use App\Global\Business\DTO\ClientDTO;
@@ -56,7 +56,7 @@ class CheckoutControllerTest extends TestCase
         $this->checkoutController->errorDTOList = [];
         $this->checkoutController->dataConstruct();
 
-        $location = $this->checkoutController->billingValidator->redirect->location;
+        $location = $this->checkoutController->checkoutBusinessFacade->redirect->location;
 
         self::assertSame('?page=order-overview', $location);
         self::assertSame('checkout.twig', $this->checkoutController->dataConstruct()->getTpl() );

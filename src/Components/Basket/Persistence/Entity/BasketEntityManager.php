@@ -3,12 +3,17 @@
 namespace App\Components\Basket\Persistence\Entity;
 
 use App\Components\Basket\Persistence\Repository\BasketRepository;
-use App\Components\User\Persistence\Repository\UserRepository;
+use App\Components\UserSession\Business\UserSessionBusinessFacade;
+use App\Components\UserSession\Persistence\UserRepository;
 use App\Global\Persistence\SQL\SqlConnector;
 
 class BasketEntityManager
 {
-    public function __construct(public SqlConnector $sqlConnector, public UserRepository $userRepository, public BasketRepository $basketRepository)
+    public function __construct(
+        public SqlConnector     $sqlConnector,
+        public UserSessionBusinessFacade $userRepository,
+        public BasketRepository $basketRepository
+    )
     {
     }
 

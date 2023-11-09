@@ -4,7 +4,7 @@ namespace App\Global\Business\Provider;
 
 use App\Components\Basket\Persistence\Repository\BasketRepository;
 
-readonly class OrderItemProvider
+class OrderItemProvider
 {
     public function __construct(private BasketRepository $basketRepository)
     {

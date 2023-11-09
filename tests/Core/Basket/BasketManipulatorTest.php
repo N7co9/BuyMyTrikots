@@ -2,11 +2,11 @@
 
 namespace Core\Basket;
 
-use App\Components\Basket\Business\DTO\BasketDTO;
 use App\Components\Basket\Business\Manipulation\BasketManipulator;
 use App\Components\Basket\Persistence\Repository\BasketRepository;
-use App\Components\User\Persistence\Entity\UserEntityManager;
-use App\Components\User\Persistence\Repository\UserRepository;
+use App\Components\UserRegistration\Persistence\UserEntityManager;
+use App\Components\UserSession\Persistence\UserRepository;
+use App\Global\Business\DTO\BasketDTO;
 use App\Global\Business\DTO\ClientDTO;
 use App\Global\Persistence\SQL\SqlConnector;
 use PHPUnit\Framework\TestCase;

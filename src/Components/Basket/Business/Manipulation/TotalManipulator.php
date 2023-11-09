@@ -4,7 +4,7 @@ namespace App\Components\Basket\Business\Manipulation;
 
 use App\Components\Basket\Persistence\Repository\BasketRepository;
 
-readonly class TotalManipulator
+class TotalManipulator
 {
     public function __construct(private BasketRepository $basketRepository)
     {

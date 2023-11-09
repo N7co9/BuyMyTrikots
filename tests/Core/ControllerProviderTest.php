@@ -4,7 +4,7 @@ namespace Core;
 
 
 use App\Components\Homepage\Communication\Controller\HomepageController;
-use App\Components\User\Communication\Controller\UserLoginController;
+use App\Components\UserSession\Communication\UserLoginController;
 use App\Global\Business\Provider\ControllerProvider;
 use PHPUnit\Framework\TestCase;
 
