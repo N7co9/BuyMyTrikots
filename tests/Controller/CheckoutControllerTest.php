@@ -9,8 +9,8 @@ use App\Components\UserSession\Communication\UserLoginController;
 use App\Global\Business\Dependency\Container;
 use App\Global\Business\Dependency\DependencyProvider;
 use App\Global\Business\DTO\ClientDTO;
-use App\Global\Business\Redirect\RedirectSpy;
 use App\Global\Persistence\SQL\SqlConnector;
+use App\Global\Presentation\Redirect\RedirectSpy;
 use PHPUnit\Framework\TestCase;
 
 class CheckoutControllerTest extends TestCase

@@ -2,44 +2,40 @@
 
 namespace App\Components\ThankYou\Communication\Controller;
 
-use App\Components\Basket\Persistence\Entity\BasketEntityManager;
-use App\Components\Basket\Persistence\Repository\BasketRepository;
-use App\Components\Order\Persistence\Entity\OrderEntityManager;
-use App\Components\Order\Persistence\Repository\OrderRepository;
+use App\Components\Basket\Business\BasketBusinessFacade;
+use App\Components\Order\Business\OrderBusinessFacade;
 use App\Global\Business\Dependency\Container;
 use App\Global\Interface\Controller\ControllerInterface;
+use App\Global\Presentation\GlobalPresentationFacade;
 use App\Global\Presentation\TemplateEngine\TemplateEngine;
 
 class ThankYouController implements ControllerInterface
 {
-    private TemplateEngine $templateEngine;
-    private OrderRepository $orderRepository;
-    private BasketRepository $basketRepository;
-    private OrderEntityManager $orderEntityManager;
-    private BasketEntityManager $basketEntityManager;
+    private GlobalPresentationFacade $presentationFacade;
+
+    private BasketBusinessFacade $basketBusinessFacade;
+    private OrderBusinessFacade $orderBusinessFacade;
 
     public function __construct(Container $container)
     {
-        $this->templateEngine = $container->get(TemplateEngine::class);
-        $this->orderRepository = $container->get(OrderRepository::class);
-        $this->basketRepository = $container->get(BasketRepository::class);
-        $this->orderEntityManager = $container->get(OrderEntityManager::class);
-        $this->basketEntityManager = $container->get(BasketEntityManager::class);
+        $this->presentationFacade = $container->get(GlobalPresentationFacade::class);
+        $this->basketBusinessFacade = $container->get(BasketBusinessFacade::class);
+        $this->orderBusinessFacade = $container->get(OrderBusinessFacade::class);
     }
-    public function dataConstruct() : TemplateEngine
+    public function dataConstruct() : GlobalPresentationFacade
     {
-        $basket = $this->basketRepository->getBasketInfo();
-        $order = $this->orderRepository->getOrderInformation();
+        $basket = $this->basketBusinessFacade->getBasketInfo();
+        $order = $this->orderBusinessFacade->getOrderInformation();
 
-        $this->orderEntityManager->saveOrder($order);
-        $orderID = $this->orderRepository->getOrderId();
-        $this->basketEntityManager->emptyBasket();
+        $this->orderBusinessFacade->saveOrder($order);
+        $orderID = $this->orderBusinessFacade->getOrderId();
+        $this->basketBusinessFacade->emptyBasket();
 
-        $this->templateEngine->addParameter('orderID', $orderID);
-        $this->templateEngine->addParameter('basket', $basket);
-        $this->templateEngine->addParameter('order', $order);
-        $this->templateEngine->setTemplate('thankyou.twig');
+        $this->presentationFacade->addParameter('orderID', $orderID);
+        $this->presentationFacade->addParameter('basket', $basket);
+        $this->presentationFacade->addParameter('order', $order);
+        $this->presentationFacade->setTemplate('thankyou.twig');
 
-        return $this->templateEngine;
+        return $this->presentationFacade;
     }
 }

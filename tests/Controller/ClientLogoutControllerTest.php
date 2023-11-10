@@ -5,9 +5,9 @@ namespace Controller;
 use App\Components\UserSession\Communication\UserLogoutController;
 use App\Core\Redirect\ReSpy;
 use App\Global\Business\Dependency\Container;
-use App\Global\Business\Redirect\Redirect;
-use App\Global\Business\Redirect\RedirectSpy;
 use App\Global\Persistence\SQL\SqlConnector;
+use App\Global\Presentation\Redirect\Redirect;
+use App\Global\Presentation\Redirect\RedirectSpy;
 use App\Global\Presentation\Session\SessionHandler;
 use PHPUnit\Framework\TestCase;
 

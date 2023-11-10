@@ -8,14 +8,12 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
-
 $container = new \App\Global\Business\Dependency\Container();
 $dependencyProvider = new \App\Global\Business\Dependency\DependencyProvider();
 $dependencyProvider->provide($container);
 $provider = new \App\Global\Business\Provider\ControllerProvider();
 
 $page = $_GET['page'] ?? '';
-
 
 foreach ($provider->getList() as $key => $controllerClass) {
     if ($key === $page) {

@@ -2,41 +2,38 @@
 
 namespace App\Components\Homepage\Communication\Controller;
 
-use App\Components\Homepage\Persistence\Repository\PlayerRepository;
+use App\Components\Homepage\Business\HomepageBusinessFacade;
+use App\Components\Homepage\Business\SearchEngine;
 use App\Global\Business\Dependency\Container;
-use App\Global\Business\Redirect\SearchEngine;
 use App\Global\Interface\Controller\ControllerInterface;
+use App\Global\Presentation\GlobalPresentationFacade;
 use App\Global\Presentation\Session\SessionHandler;
 use App\Global\Presentation\TemplateEngine\TemplateEngine;
 
 class HomepageController implements ControllerInterface
 {
-    private TemplateEngine $templateEngine;
-    private PlayerRepository $playerRepository;
-    public SearchEngine $searchEngine;
-    private SessionHandler $sessionHandler;
+    private HomepageBusinessFacade $homepageBusinessFacade;
+    private GlobalPresentationFacade $presentationFacade;
     public function __construct(Container $container)
     {
-        $this->sessionHandler = $container->get(SessionHandler::class);
-        $this->templateEngine = $container->get(TemplateEngine::class);
-        $this->playerRepository = $container->get(PlayerRepository::class);
-        $this->searchEngine = $container->get(SearchEngine::class);
+        $this->homepageBusinessFacade = $container->get(HomepageBusinessFacade::class);
+        $this->presentationFacade = $container->get(GlobalPresentationFacade::class);
     }
 
-    public function dataConstruct() : TemplateEngine
+    public function dataConstruct() : GlobalPresentationFacade
     {
-        $this->searchEngine->search();
+        $this->homepageBusinessFacade->search();
 
         $teamID = $_GET['id'] ?? null;
 
-        $user = $this->sessionHandler->getSessionMail();
+        $user = $this->presentationFacade->getSessionMail();
 
-        $players = $this->playerRepository->getPlayers($teamID);
+        $players = $this->homepageBusinessFacade->getPlayers($teamID);
 
-        $this->templateEngine->addParameter('user', $user);
-        $this->templateEngine->addParameter('players', $players);
-        $this->templateEngine->setTemplate('homepage.twig');
+        $this->presentationFacade->addParameter('user', $user);
+        $this->presentationFacade->addParameter('players', $players);
+        $this->presentationFacade->setTemplate('homepage.twig');
 
-        return $this->templateEngine;
+        return $this->presentationFacade;
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Global\Business\Redirect;
+namespace App\Components\Homepage\Business;
 
-use App\Global\Interface\Redirect\RedirectInterface;
+use App\Global\Presentation\Redirect\RedirectInterface;
 
 class SearchEngine
 {

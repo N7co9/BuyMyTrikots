@@ -4,6 +4,7 @@ namespace App\Components\Basket\Business;
 
 use App\Components\Basket\Business\Manipulation\BasketManipulator;
 use App\Components\Basket\Business\Manipulation\TotalManipulator;
+use App\Components\Basket\Persistence\Entity\BasketEntityManager;
 use App\Components\Basket\Persistence\Repository\BasketRepository;
 
 class BasketBusinessFacade implements BasketBusinessFacadeInterface
@@ -11,7 +12,8 @@ class BasketBusinessFacade implements BasketBusinessFacadeInterface
     public function __construct(
         public BasketManipulator $basketManipulator,
         public TotalManipulator $totalManipulator,
-        public BasketRepository $basketRepository
+        public BasketRepository $basketRepository,
+        public BasketEntityManager $basketEntityManager
     )
     {
     }
@@ -42,6 +44,10 @@ class BasketBusinessFacade implements BasketBusinessFacadeInterface
     public function getItemQuantity($itemID) : array
     {
         return $this->basketRepository->getItemQuantity($itemID);
+    }
+    public function emptyBasket() : string
+    {
+        return  $this->basketEntityManager->emptyBasket();
     }
 
 }

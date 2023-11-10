@@ -3,7 +3,7 @@
 namespace App\Components\Checkout\Business\Validation;
 
 use App\Global\Business\DTO\ErrorDTO;
-use App\Global\Interface\Redirect\RedirectInterface;
+use App\Global\Presentation\Redirect\RedirectInterface;
 
 class BillingValidator
 {

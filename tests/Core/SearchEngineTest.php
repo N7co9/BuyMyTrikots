@@ -2,9 +2,9 @@
 
 namespace Core;
 
-use App\Global\Business\Redirect\RedirectSpy;
-use App\Global\Business\Redirect\SearchEngine;
-use App\Global\Interface\Redirect\RedirectInterface;
+use App\Components\Homepage\Business\SearchEngine;
+use App\Global\Presentation\Redirect\RedirectInterface;
+use App\Global\Presentation\Redirect\RedirectSpy;
 use PHPUnit\Framework\TestCase;
 
 class SearchEngineTest extends TestCase

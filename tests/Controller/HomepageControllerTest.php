@@ -3,6 +3,7 @@
 namespace Controller;
 
 use App\Components\Basket\Persistence\Repository\BasketRepository;
+use App\Components\Homepage\Business\SearchEngine;
 use App\Components\Homepage\Communication\Controller\HomepageController;
 use App\Components\Order\Persistence\Entity\OrderEntityManager;
 use App\Components\Order\Persistence\Repository\OrderRepository;
@@ -14,9 +15,8 @@ use App\Global\Business\Dependency\DependencyProvider;
 use App\Global\Business\DTO\ClientDTO;
 use App\Global\Business\DTO\OrderDTO;
 use App\Global\Business\DTO\PlayerDTO;
-use App\Global\Business\Redirect\RedirectSpy;
-use App\Global\Business\Redirect\SearchEngine;
 use App\Global\Persistence\SQL\SqlConnector;
+use App\Global\Presentation\Redirect\RedirectSpy;
 use PHPUnit\Framework\TestCase;
 
 class HomepageControllerTest extends TestCase

@@ -1,9 +1,7 @@
 <?php
 
-namespace App\Global\Business\Redirect;
+namespace App\Global\Presentation\Redirect;
 #Redirect
-
-use App\Global\Interface\Redirect\RedirectInterface;
 
 class Redirect implements RedirectInterface
 {

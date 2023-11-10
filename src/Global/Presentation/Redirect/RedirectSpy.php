@@ -1,8 +1,6 @@
 <?php
 
-namespace App\Global\Business\Redirect;
-
-use App\Global\Interface\Redirect\RedirectInterface;
+namespace App\Global\Presentation\Redirect;
 
 class RedirectSpy implements RedirectInterface
 {

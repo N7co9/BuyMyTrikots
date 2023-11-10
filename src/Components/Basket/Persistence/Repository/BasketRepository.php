@@ -48,10 +48,10 @@ class BasketRepository
     {
         $array = $this->getBasketInfo();
         $price = 0;
+        $totalQuantity = 0;
         foreach ($array as $item) {
-            if ($item->quantity >= 2) {
-                $item->price *= $item->quantity;
-            }
+                $totalQuantity += $item->quantity;
+                $item->price *= $totalQuantity;
             $price = $item->price;
         }
         return $price ?? null;

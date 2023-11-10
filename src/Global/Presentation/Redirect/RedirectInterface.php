@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Global\Interface\Redirect;
+namespace App\Global\Presentation\Redirect;
 
 interface RedirectInterface
 {

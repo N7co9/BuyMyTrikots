@@ -6,25 +6,24 @@ use App\Components\Basket\Business\BasketBusinessFacade;
 use App\Components\Basket\Persistence\Repository\BasketRepository;
 use App\Global\Business\Dependency\Container;
 use App\Global\Interface\Controller\ControllerInterface;
+use App\Global\Presentation\GlobalPresentationFacade;
 use App\Global\Presentation\Session\SessionHandler;
 use App\Global\Presentation\TemplateEngine\TemplateEngine;
 
 
 class BasketController implements ControllerInterface
 {
-    private TemplateEngine $templateEngine;
     private BasketBusinessFacade $basketBusinessFacade;
-    public SessionHandler $sessionHandler;
+    private GlobalPresentationFacade $presentationFacade;
     public string $feedback;
     public function __construct(Container $container)
     {
+        $this->presentationFacade = $container->get(GlobalPresentationFacade::class);
         $this->feedback = '';
-        $this->sessionHandler = $container->get(SessionHandler::class);
-        $this->templateEngine = $container->get(TemplateEngine::class);
         $this->basketBusinessFacade = $container->get(BasketBusinessFacade::class);
     }
 
-    public function dataConstruct() : TemplateEngine
+    public function dataConstruct() : GlobalPresentationFacade
     {
         $action = $_GET['action'] ?? '';
 
@@ -33,7 +32,7 @@ class BasketController implements ControllerInterface
             'remove' => 'removeItemFromBasket'
         ];
 
-        if (!empty($this->sessionHandler->getSessionMail()) && array_key_exists($action, $actionMap)) {
+        if (!empty($this->presentationFacade->getSessionMail()) && array_key_exists($action, $actionMap)) {
             $this->feedback = 'successful action';
             $this->basketBusinessFacade->{$actionMap[$action]}();
         }
@@ -41,10 +40,10 @@ class BasketController implements ControllerInterface
         $basketContent = $this->basketBusinessFacade->getBasketInfo();
         $total = $this->basketBusinessFacade->getBasketTotal();
 
-        $this->templateEngine->addParameter('contents', $basketContent);
-        $this->templateEngine->addParameter('total', $total);
-        $this->templateEngine->setTemplate('basket.twig');
+        $this->presentationFacade->addParameter('contents', $basketContent);
+        $this->presentationFacade->addParameter('total', $total);
+        $this->presentationFacade->setTemplate('basket.twig');
 
-        return $this->templateEngine;
+        return $this->presentationFacade;
     }
 }

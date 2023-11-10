@@ -2,32 +2,31 @@
 
 namespace App\Components\UserRegistration\Communication;
 
-use App\Components\UserRegistration\Business\Validation\UserValidator;
-use App\Components\UserRegistration\Persistence\UserEntityManager;
-use App\Components\UserSession\Persistence\UserRepository;
+use App\Components\Order\Business\OrderBusinessFacade;
+use App\Components\UserRegistration\Business\UserRegistrationBusinessFacade;
+use App\Components\UserSession\Business\UserSessionBusinessFacade;
 use App\Global\Business\Dependency\Container;
 use App\Global\Business\DTO\ClientDTO;
 use App\Global\Business\DTO\ErrorDTO;
 use App\Global\Interface\Controller\ControllerInterface;
+use App\Global\Presentation\GlobalPresentationFacade;
 use App\Global\Presentation\TemplateEngine\TemplateEngine;
 
 class UserRegistrationController implements ControllerInterface
 {
-    private UserValidator $validator;
-    private TemplateEngine $templateEngine;
-    private UserRepository $clientRepository;
-    private UserEntityManager $clientEntityManager;
+    private GlobalPresentationFacade $presentationFacade;
+    private UserRegistrationBusinessFacade $registrationBusinessFacade;
+    private UserSessionBusinessFacade $sessionBusinessFacade;
     public array $errorDTOList;
 
     public function __construct(Container $container)
     {
-        $this->templateEngine = $container->get(TemplateEngine::class);
-        $this->clientRepository = $container->get(UserRepository::class);
-        $this->clientEntityManager = $container->get(UserEntityManager::class);
-        $this->validator = $container->get(UserValidator::class);
+        $this->sessionBusinessFacade = $container->get(UserSessionBusinessFacade::class);
+        $this->registrationBusinessFacade = $container->get(UserRegistrationBusinessFacade::class);
+        $this->presentationFacade = $container->get(GlobalPresentationFacade::class);
     }
 
-    public function dataConstruct(): TemplateEngine
+    public function dataConstruct(): GlobalPresentationFacade
     {
         $clientDTO = new ClientDTO();
         $clientDTO->username = ($_POST['name'] ?? '');
@@ -37,7 +36,7 @@ class UserRegistrationController implements ControllerInterface
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-            $validator = $this->validator;
+            $validator = $this->registrationBusinessFacade;
             $this->errorDTOList = $validator->validate($clientDTO);
 
             if (empty($this->errorDTOList)) {
@@ -48,8 +47,8 @@ class UserRegistrationController implements ControllerInterface
                 $newUser->email = $clientDTO->email;
                 $newUser->password = $validPassword;
 
-                if (empty($this->clientRepository->findByMail($clientDTO->email) && !empty($clientDTO->password))) {
-                    $this->clientEntityManager->saveCredentials($newUser);
+                if (empty($this->sessionBusinessFacade->findByMail($clientDTO->email) && !empty($clientDTO->password))) {
+                    $this->registrationBusinessFacade->saveCredentials($newUser);
                     $this->errorDTOList [] = new ErrorDTO('Success. Welcome abroad!');
                     $clientDTO->username = ('');
                     $clientDTO->password = ('');
@@ -60,12 +59,12 @@ class UserRegistrationController implements ControllerInterface
             }
         }
 
-        $this->templateEngine->setTemplate('registration.twig');
-        $this->templateEngine->addParameter('user', $clientDTO);
-        $this->templateEngine->addParameter('vName', $clientDTO->username);
-        $this->templateEngine->addParameter('vMail', $clientDTO->email);
-        $this->templateEngine->addParameter('errors', $this->errorDTOList);
+        $this->presentationFacade->setTemplate('registration.twig');
+        $this->presentationFacade->addParameter('user', $clientDTO);
+        $this->presentationFacade->addParameter('vName', $clientDTO->username);
+        $this->presentationFacade->addParameter('vMail', $clientDTO->email);
+        $this->presentationFacade->addParameter('errors', $this->errorDTOList);
 
-        return $this->templateEngine;
+        return $this->presentationFacade;
     }
 }
